@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;font-family:'IBM Plex Sans Arabic',sans-serif;}body{overscroll-behavior:none;background-color:#f8f9ff;color:#121c2a;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface-variant": "#554336", "on-primary-container": "#fffbff", "surface-container-low": "#eff4ff", "primary-fixed-dim": "#ffb77d", "outline-variant": "#dbc2b0", "surface-tint": "#904d00", "on-secondary-fixed-variant": "#005320", "secondary-container": "#7cf994", "surface-bright": "#f8f9ff", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#ffb596", "surface-dim": "#d0dbed", "background": "#f8f9ff", "primary": "#8d4b00", "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#fffbff", "primary-container": "#b15f00", "secondary-fixed": "#7ffc97", "on-tertiary": "#ffffff", "surface-variant": "#d9e3f6", "tertiary-fixed": "#ffdbcd", "on-secondary-container": "#007230", "inverse-surface": "#27313f", "error": "#ba1a1a", "inverse-primary": "#ffb77d", "inverse-on-surface": "#eaf1ff", "on-primary-fixed-variant": "#6e3900", "on-secondary-fixed": "#002109", "outline": "#887364", "surface": "#f8f9ff", "on-error": "#ffffff", "surface-container": "#e6eeff", "error-container": "#ffdad6", "on-tertiary-fixed": "#360f00", "secondary-fixed-dim": "#62df7d", "on-primary-fixed": "#2f1500", "on-background": "#121c2a", "on-surface": "#121c2a", "surface-container-high": "#dee9fc", "primary-fixed": "#ffdcc3", "surface-container-highest": "#d9e3f6", "tertiary-container": "#ba5828", "secondary": "#006e2d", "tertiary": "#9a4111", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#7d2d00" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "1rem", "margin-desktop": "2rem", "space-2xl": "3rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem", "margin": "1rem", "margin-tablet": "1.5rem", "space-md": "1rem", "space-lg": "1.5rem" }, fontFamily: { "price-lg": ["IBM Plex Sans Arabic", "sans-serif"], "price-md": ["IBM Plex Sans Arabic", "sans-serif"], "headline-lg": ["IBM Plex Sans Arabic", "sans-serif"], "body-lg": ["IBM Plex Sans Arabic", "sans-serif"], "headline-lg-mobile": ["IBM Plex Sans Arabic", "sans-serif"], "label-md": ["IBM Plex Sans Arabic", "sans-serif"], "headline-md": ["IBM Plex Sans Arabic", "sans-serif"], "display-lg": ["IBM Plex Sans Arabic", "sans-serif"], "body-sm": ["IBM Plex Sans Arabic", "sans-serif"], "display-lg-mobile": ["IBM Plex Sans Arabic", "sans-serif"], "headline-sm": ["IBM Plex Sans Arabic", "sans-serif"], "body-md": ["IBM Plex Sans Arabic", "sans-serif"], "label-lg": ["IBM Plex Sans Arabic", "sans-serif"] }, fontSize: { "price-lg": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "price-md": ["15px", { "lineHeight": "20px", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "display-lg": ["40px", { "lineHeight": "52px", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_4px_20px_rgba(180,130,80,0.08)]"><div class="h-36 px-margin flex flex-col justify-between py-space-xs"><div class="flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="logo_kingdomofparadise.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xp_GKn0bAMTChJgQHVSxDnFMIdOWqH_1x8_GXvxH7JRHWF7U5X1WUmO65C_OGEgh2Qd6wu3BsPmO5LBQrAeUvY4rwjfRqo7GSqwVVY_S9F1UMbb16a_6N8MuwSLdoRVb8qtD-LHWKiz0rmo1r0nwUGuq1Wy9Pst3Knt7MUMSSWpOlgEeX08dTNX-47wpNi8T5Ya18bxXLe1F5-cZFbqE8rljgBctDcXk_x4Xmi41xkKJuIhx3iUzqqwxcMtyFAx4YOEWKiENGp2wg"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary font-bold leading-none">مملكة المعجنات</span><span class="text-[10px] text-on-surface-variant font-label-md px-1.5 py-0.5 rounded-full bg-surface-container">Main Menu</span></div><span class="font-body-sm text-body-sm text-on-surface-variant">فطائر ومخبوزات طازجة يومياً</span></div></div><div class="flex items-center gap-space-xs"><a aria-label="تواصل عبر واتساب" class="w-11 h-11 rounded-full bg-secondary text-on-secondary flex items-center justify-center hover:bg-secondary/90 transition-transform active:scale-95 shadow-[0_2px_8px_rgba(0,110,45,0.2)]" href="https://wa.me/966553856006" rel="noopener" target="_blank"><span class="material-symbols-outlined text-[20px]">chat</span></a><a aria-label="موقع المحل على الخريطة" class="w-11 h-11 rounded-full bg-surface-container-highest text-primary flex items-center justify-center hover:bg-surface-container-high transition-transform active:scale-95" href="https://maps.google.com" rel="noopener" target="_blank"><span class="material-symbols-outlined text-[20px]">location_on</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="bg-surface-container-low p-1 rounded-xl flex items-center justify-between gap-1"><button class="flex-1 py-1.5 px-space-xs rounded-lg text-center font-label-md text-label-md bg-surface-container-lowest text-primary font-bold shadow-[0_1px_4px_rgba(0,0,0,0.06)] flex items-center justify-center gap-1" type="button"><span class="material-symbols-outlined text-[16px]">moped</span><span>توصيل</span></button><button class="flex-1 py-1.5 px-space-xs rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1" type="button"><span class="material-symbols-outlined text-[16px]">storefront</span><span>استلام</span></button><button class="flex-1 py-1.5 px-space-xs rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-1" type="button"><span class="material-symbols-outlined text-[16px]">restaurant</span><span>داخل المحل</span></button></div></div></header><main class="flex flex-col relative w-full pt-36 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Top Location & WhatsApp Quick Context Bar -->
+<section class="px-margin py-space-sm flex items-center justify-between gap-space-sm bg-surface-container-low">
+<a class="flex items-center gap-1.5 text-on-surface hover:text-primary transition-colors min-w-0" href="https://www.google.com/maps?daddr=26.429783389013608,50.06738620070687" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0" style="font-variation-settings: 'FILL' 1;">pin_drop</span>
+<span class="font-label-md text-label-md truncate">فرع الدمام - حي الشاطئ</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant flex-shrink-0">chevron_left</span>
+</a>
+<a class="flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md hover:bg-secondary-fixed transition-colors" href="https://wa.me/966553856006" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span>تواصل مباشر</span>
+</a>
+</section>
+<!-- Fulfillment Mode Bar -->
+<section class="px-margin pt-space-sm pb-space-xs">
+<div class="flex items-center justify-between bg-surface-container-highest p-1 rounded-xl">
+<button class="order-mode-btn flex-1 py-2 px-space-xs rounded-lg text-center font-label-md text-label-md bg-surface-container-lowest text-primary font-bold shadow-sm transition-all flex flex-col items-center justify-center" data-order-type="delivery" type="button">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">moped</span>
+<span>توصيل</span>
+</span>
+<span class="text-[10px] text-on-surface-variant mt-0.5">30-45 دقيقة</span>
+</button>
+<button class="order-mode-btn flex-1 py-2 px-space-xs rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex flex-col items-center justify-center" data-order-type="pickup" type="button">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">storefront</span>
+<span>استلام من الفرع</span>
+</span>
+<span class="text-[10px] text-on-surface-variant mt-0.5">~15 دقيقة</span>
+</button>
+<button class="order-mode-btn flex-1 py-2 px-space-xs rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex flex-col items-center justify-center" data-order-type="dinein" type="button">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+<span>داخل المحل</span>
+</span>
+<span class="text-[10px] text-on-surface-variant mt-0.5">طازج وفوري</span>
+</button>
+</div>
+</section>
+<!-- Search & Quick Filters -->
+<section class="px-margin pt-space-xs pb-space-sm">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute right-3 text-on-surface-variant text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pr-10 pl-10 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 shadow-sm outline-none focus:bg-surface-container-low transition-all" id="menu-search-input" placeholder="ابحث عن فطيرة، معجنات، بيتزا..." type="search"/>
+<button class="hidden absolute left-3 w-6 h-6 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center" id="clear-search-btn" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Quick Filter Tags -->
+<div class="flex items-center gap-space-xs mt-2 overflow-x-auto no-scrollbar">
+<button class="quick-filter-btn flex-shrink-0 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span>الأكثر طلباً</span>
+</button>
+<button class="quick-filter-btn flex-shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]">high_res</span>
+<span>عروض خاصة</span>
+</button>
+<button class="quick-filter-btn flex-shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+<span>أقل من 20 دقيقة</span>
+</button>
+</div>
+</section>
+<!-- Sticky Categories Navigation Bar -->
+<nav class="sticky top-36 z-40 bg-surface/95 backdrop-blur-md shadow-sm py-2 px-margin overflow-x-auto no-scrollbar flex items-center gap-2">
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-primary text-on-primary font-bold shadow-sm transition-all whitespace-nowrap" href="#section-fresh">جديدنا كله فريش !</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-zaatar">الزعتر الأصيل</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-family">البيتزا والوجبات العائلية</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-falafel">فلافل ولبنة</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-cheese">الجبن والسبانخ</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-meat">المشويات واللحم</a>
+<a class="cat-pill flex-shrink-0 px-4 py-1.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface shadow-sm transition-all whitespace-nowrap" href="#section-drinks">الصوصات والمشروبات</a>
+</nav>
+<!-- Menu Content Sections Container -->
+<div class="px-margin flex flex-col gap-space-lg pt-space-md">
+<!-- Section 1: Fresh Specials -->
+<section class="flex flex-col gap-3" id="section-fresh">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-6 rounded-full bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">جديدنا كله فريش !</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-[11px] font-bold">مخبوز طازج</span>
+</div>
+<!-- Item 1: كباب دجاج ملغوم -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="1" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/2nUwnLwDxLiapdroTtPf.jpeg" data-name="كباب دجاج ملغوم فطيرة" data-price="14.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="كباب دجاج ملغوم فطيرة" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwt7WYHSttUewl81HRIDv1vgqtw4D_dx-WW8RaFZItP_wFllRKSvdUOoIRZ6v8oQs4h4RMOga2KIbddEIrJoC-wZGUMPuuz-sp4MLp4JgfCQImywSJTFYxwEcLz1_FOcFO6u1sRBAwJh0woguw46HeibabE1GYdyZoIJr1SYm5iTJKefzCbjpZCldjov3HCtQYGOHbdqfDnqULj5kvl-10QzJzwZSatgj1WHf9ZuKjSSjuCVOnXHv08g"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">602 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">كباب دجاج ملغوم فطيرة</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">دجاج متبل مشوي مع صوص خاص وجبنة ذائبة في عجينة طازجة مقرمشة</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">14.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="1">
+<button aria-label="أضف كباب دجاج ملغوم فطيرة للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Item 2: شيش طاووق ملغوم -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="2" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/J9rK9Xo_XK-el-Bob16Z.jpeg" data-name="شيش طاووق ملغوم فطيرة" data-price="14.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="شيش طاووق ملغوم فطيرة" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYqw0F5R0tAXuRRmznb7gkr2-NOMdISrmHpwvoEHWIbvTvvt6SN7pnrsnJC7iqiertc4TFzkilDa7A5ohWFYGZjjbcuUVFHNb_iVfvhQU2SkPX3Gjdmc74FpPSqj7R9LC0SPnffZtTXlSCoOvxcdnfMqzKmegmvUnmRYlhfJ5_cIhAsEVkC4Fy0kxOQ4iLVma8WDcee8yia2Duyi9TatnV_KM4rH_GGNgc8wGmLSj_LQ9zUiz4PRRN4A"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">330 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">شيش طاووق ملغوم فطيرة</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">قطع شيش طاووق مشوية بتتبيلة ملكية مميزة مع صوص الثومية والجبن</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">14.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="2">
+<button aria-label="أضف شيش طاووق ملغوم للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Item 3: اللحسة -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="3" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/G594HQIkcLbnHOYEjHyB.jpeg" data-name="اللحسة" data-price="10.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="فطيرة اللحسة" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_5c1pkvrI2IsOPc4kYcHPllPqqumsb5wzTioih8xRGhh-12sBm5qcXtZ_APGOCacOc3RLmPRVaOWf59oe4K3O5DK7FWBU0-y8p1EKB4rWkEeQFMbPMpTZtKBchufcCZfQJwH7fo7H209ReSFDUGdSlB4P6s6_g2ofv-QmZXYPwb0rm-934pyKRqH9rQxZRPFAtQfGQi8Z70B9OsdLsBlV64wI8BrP0TkZ9r4o2qY8VkNFZO56SJ_THQ"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">220 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">اللحسة</h3>
+<span class="text-secondary flex-shrink-0 material-symbols-outlined text-[18px]" title="مناسب للنباتيين">eco</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">خلطة البيض اللذيذة مع جبن كيري الفاخر على الطريقة التقليدية</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">10.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="3">
+<button aria-label="أضف فطيرة اللحسة للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Item 4: تونة سبايسي -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="4" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/vnOes1uJOxLwg4jtjbcP.jpeg" data-name="تونة سبايسي" data-price="12.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="تونة سبايسي" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2zDgkwT7rN5Fb-4yBVE_gV8H5oKzY_crZ2_4vg2MC_TLiBnb0eRJShgeRBcNCBOEm1xtOag2jYIjsj4IHJ-Jacy1DCXKEACXoxZIYfuZu-QOy7eV3S5iObJoatGOjo9ZomrJ2F7PL67BMAo3UTKXDbNDxU3VST0_LYtpSZjXlV3mLNKQ49nCr_PvbLRPYAiIe5s3IfNH24ULb5AEpjCOAHdHMmuzhvyd5tMEcCrnt5eEcgQZUaUVHcA"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">440 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">تونة سبايسي</h3>
+<span class="text-error flex-shrink-0 material-symbols-outlined text-[16px]" title="حار">local_fire_department</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">تونة فاخرة مع الخضار المتبلة ورشة صوص حار مميز</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">12.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="4">
+<button aria-label="أضف تونة سبايسي للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Item 5: كبدة جبن -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="5" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/5KP5rgTRf7XLClHojZkA.png" data-name="كبدة جبن" data-price="14.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="كبدة جبن" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7jwoKWY_mtdm79DMF1WqtIwI2Ro0RbwNrlP1Ch0LVIl_4NEQYrkhmITgSaOO8Ua2XlZGNvf3TTqiXYWd-EM_MgKtwMpG70dyBFEEC1O1XkeTU3Z0TQbtrkuRR0Kdf7jPrj4EGDiW_ovT1ze0KcIJNQuiyNWEKuK2ekh8Se39Vq9lPp8pF9aRnf4l56aCS4AwgDppZVdTfyBHAI31d6mDMEpOiBZVePu6b_baWTSjBmlOJFxqwKtVuuQ"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">360 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">كبدة جبن</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">كبدة طازجة مطهوة مع بهارات شرقية وجبن كريمي ذائب</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">14.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="5">
+<button aria-label="أضف كبدة جبن للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Section 2: Zaatar Classics -->
+<section class="flex flex-col gap-3" id="section-zaatar">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-6 rounded-full bg-secondary"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">الزعتر الأصيل</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-[11px]">فرن حجري</span>
+</div>
+<!-- Item 6: زعتر -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="6" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554474-1.jpg" data-name="زعتر بلدي" data-price="3.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="فطيرة زعتر بلدي" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRd0sKieldYKwz6DPdpCfiUsD2-CygdvUJ_h52vXu3PI-q4x03BoBQYPTl7pcigX0RPEDaGc3vTYrwR3TdPAI7jpB0P1KLmPOWsyldDK2liLV5vlS4Kqz6CN3xzFocdVyLvHkvUbsBWDA_bCw0wzgoi7FuyeKw96fsW6PiDmhfDxnVoMhw5o93pLJj30BD28weIMQZ3dkwNxxU2DVcfScSQs6LqAdcBe_JU5o63CSfjj7FGcHJKbEu2w"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">660 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">زعتر بلدي</h3>
+<span class="text-secondary flex-shrink-0 material-symbols-outlined text-[18px]">eco</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">زعتر بلدي فاخر مع زيت زيتون بكر ممتاز ومخبوز في الفرن الحجري</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">3.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="6">
+<button aria-label="أضف فطيرة زعتر للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Item 7: زعتر مملكة المعجنات -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="7" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554557-2.jpg" data-name="زعتر مملكة المعجنات" data-price="6.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="زعتر مملكة المعجنات المميز" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcI7iejgdpsaGwL3Zqh3wkSIE1X50xxPvLtIQ5gkvEqmR2nJYtVb_yHqqARrVJWA0Jvqbk5FVUG06YtiAYyxXVo3LrMoxDZ0NsvwUrYHCkYj5O2MhCGpzED8pmHpJp58I55CFJ5eyxvq0Usvgv1IYxtTBFmqR2S3-lzNxyqnRIJjMb7CATPsB7h6QB75PXeR31q8ijRCSN3qEPiKVBsF0_47enTz2vJc0SmydchGb4WSpWHdeA15gUIg"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">620 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">زعتر مملكة المعجنات</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">خلطة الزعتر الخاصة بنا مع الخضار الطازجة وجبنة الموزاريلا</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">6.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="7">
+<button aria-label="أضف زعتر مملكة المعجنات للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Section 3: Pizza & Family Boxes -->
+<section class="flex flex-col gap-3" id="section-family">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-6 rounded-full bg-tertiary"></span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">البيتزا والوجبات العائلية</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-[11px] font-bold">مثالي للمشاركة</span>
+</div>
+<!-- Item 8: مينى معجنات كبير -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex flex-col gap-2.5 transition-transform active:scale-[0.99]" data-id="8" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/kbtsxPCmTABRtzB5iSpe.jpg" data-name="مينى معجنات كبير (بوكس عائلي)" data-price="55.00">
+<div class="relative w-full h-40 rounded-lg overflow-hidden bg-surface-container">
+<img alt="مينى معجنات كبير بوكس عائلي" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhFh70gbTYSgdyDRA9MnNfRHiuSRqxhIZETFQ7WBfZNjlL1foi79NvbdLG3MRFbDRZcEW68bG7SYBbqFAKPhgMNjcrNy_wxvgf-4VG3-6uTbNzNeouKzqL88TCN0yjt7A_MnCyrC4_0ndy7Lys3I3ow58QKQ1GNTNWeRmnuKFfEvja2fbAHOSMv8IP4xJqxUXgMVCRWRqRU6Bp6kzVcPMTtN2z9f4q0d-iKG_QkyIfQ0J1WRTlEjKmwA"/>
+<div class="absolute top-2 right-2 px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-md">الأعلى مبيعاً</div>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[11px] font-label-md">3180 سعرة</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">مينى معجنات كبير (بوكس عائلي)</h3>
+<span class="font-price-lg text-price-lg text-primary">55.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">تشكيلة فاخرة من الميني معجنات المتنوعة (لحم، جبن، زعتر، سبانخ) مثالية للمناسبات والجمعات.</p>
+</div>
+<div class="flex items-center justify-end pt-1">
+<div class="action-slot" data-item-id="8">
+<button class="add-item-btn px-4 py-2 rounded-lg bg-primary text-on-primary flex items-center gap-1.5 font-label-md text-label-md hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>أضف للطلب</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Item 9: بوكس مشكل مشويات -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex flex-col gap-2.5 transition-transform active:scale-[0.99]" data-id="9" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/hux7l-F6P-NwQhOJQoIa.jpg" data-name="بوكس مشكل مشويات" data-price="82.00">
+<div class="relative w-full h-40 rounded-lg overflow-hidden bg-surface-container">
+<img alt="بوكس مشكل مشويات" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdtLGCvaxmdvJq3eld6qgvDwvNLJD33Yzkqp2MkPdXv-BmIi6Kfvt6iwYAnUUJSDT4MCfoAkIkCNbGpSgKFS5CahXQuVb1iSg_H27LFs9Zqbgur2tfrvKGhcco7AiRX7oW-tARhBNvHZOejgC3F_qlV0qG_-SpuUEwd-RnSI3_wM4ivQ3-5_qM66SKdosuwNfqHYnGQczkj8U8p7Sq6yISCFPbo8H8hasSj-7V6uJzzIlQCwkCQbDg5g"/>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[11px] font-label-md">5800 سعرة</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">بوكس مشكل مشويات</h3>
+<span class="font-price-lg text-price-lg text-primary">82.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">بوكس فاخر يجمع تشكيلة معجنات المشويات الملكية مع الصصوصات الخاصة والبطاطس المقرمشة.</p>
+</div>
+<div class="flex items-center justify-end pt-1">
+<div class="action-slot" data-item-id="9">
+<button class="add-item-btn px-4 py-2 rounded-lg bg-primary text-on-primary flex items-center gap-1.5 font-label-md text-label-md hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>أضف للطلب</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Item 10: بيتزا دجاج رانش -->
+<article class="food-item bg-surface-container-lowest rounded-xl p-3 shadow-[0_2px_8px_rgba(180,130,80,0.06)] flex gap-3 transition-transform active:scale-[0.99]" data-id="10" data-img="https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg" data-name="بيتزا دجاج رانش" data-price="18.00">
+<div class="relative w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-surface-container">
+<img alt="بيتزا دجاج رانش" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEtbNV6_S2WMoncnbGPgX_avbGhC7yeh3DHayH1Ada4dIBGInhE0iGIHSDTH78IdESp2BS2zihXne4A0FbUZB0zJOWukain0sOKdMjqTZX1G9FXbXvodlSasy2gzbMww-E22Fj7CPEYxJ_hQmdk14bsBT-sCIdAuRkNVq6HmTxYfxky6Y3C0r8KWttjB_QDrksns7se9WPUGgJ_wPhUvvhnSrcvLuUeJlzl7HKyRgy59GmO76HzY-dug"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-inverse-surface/85 text-inverse-on-surface text-[10px] font-label-md">890 سعرة</span>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0">
+<div>
+<div class="flex items-start justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">بيتزا دجاج رانش</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">صلصة رانش كريمية مع قطع دجاج مشوية وموزاريلا وفلفل بارد مقرمش</p>
+</div>
+<div class="flex items-center justify-between mt-2 pt-1">
+<span class="font-price-lg text-price-lg text-primary">18.00 <span class="text-xs font-normal text-on-surface-variant">ر.س</span></span>
+<div class="action-slot" data-item-id="10">
+<button aria-label="أضف بيتزا دجاج رانش للسلة" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</section>
+<!-- Quality Guarantee Badge Card -->
+<section class="bg-surface-container-low rounded-2xl p-4 flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest text-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">طازج من الفرن إلى مائدتك</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">نعجن ونخبز طوال اليوم بأجود أنواع الدقيق والجبن واللحوم الطازجة.</p>
+</div>
+</section>
+</div>
+<!-- Floating Sticky Cart Summary Trigger Bar -->
+<aside class="fixed bottom-20 left-4 right-4 z-40 transition-transform duration-300" id="floating-cart-bar">
+<div class="max-w-md mx-auto bg-inverse-surface text-inverse-on-surface rounded-2xl p-2.5 px-3.5 shadow-xl flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[22px]">shopping_bag</span>
+<span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary text-[10px] font-bold flex items-center justify-center" id="floating-cart-badge">2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md truncate" id="floating-cart-items-text">2 صنف في السلة</span>
+<span class="text-xs text-inverse-on-surface/80">المجموع: <strong class="text-primary-fixed font-bold" id="floating-cart-total-text">28.00 ر.س</strong></span>
+</div>
+</div>
+<button class="h-11 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold flex items-center gap-1.5 hover:bg-primary-container transition-transform active:scale-95 shadow-md flex-shrink-0" id="open-checkout-modal-btn" type="button">
+<span>إتمام الطلب</span>
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+</div>
+</aside>
+<!-- Checkout Bottom Sheet Modal & Backdrop -->
+<div class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300" id="checkout-backdrop"></div>
+<section class="fixed inset-x-0 bottom-0 z-50 bg-surface-container-lowest rounded-t-3xl shadow-2xl max-h-[92vh] flex flex-col transform translate-y-full transition-transform duration-300 max-w-lg mx-auto" id="checkout-sheet">
+<!-- Sheet Drag Pill & Header -->
+<div class="p-4 pb-2 border-none flex flex-col items-center">
+<div class="w-12 h-1.5 rounded-full bg-surface-variant mb-3"></div>
+<div class="flex items-center justify-between w-full">
+<div class="flex items-center gap-2">
+<img alt="logo_kingdomofparadise.png" class="w-8 h-8 rounded-lg object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA21KASuYbYiCJnz-TQ4nYgBC0iQWTXemIw0kAPqnz9UC87j1OlhBgLwhOdELy3Pglo44SbbnYvOOp9z3113wCtAv3ReUv7FXDL7-GxAc1TEwGlaVXqtHz3sUpjcAgko-fQYqQuE7PEJGLYnExRtFXc2mIDoGDAsQmjP4HS_rc6buTZEcdk25dZGS95xRZl8fkfA2mSVFGmX7U2JULaHxp4naDlHGGhjjflaOomNP8GYZyi1mwZsWgoJjedkxDvOgPQje8"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">تأكيد طلبك</h2>
+<span class="text-xs text-on-surface-variant">مملكة المعجنات - إرسال فوري لواتساب الفرع</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center hover:bg-surface-container-high transition-colors" id="close-checkout-modal-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Modal Content -->
+<div class="overflow-y-auto px-4 py-2 flex flex-col gap-4">
+<!-- Fulfillment Mode Radio in Checkout -->
+<div class="bg-surface-container-low p-1 rounded-xl flex items-center">
+<button class="sheet-mode-btn flex-1 py-1.5 rounded-lg text-center font-label-md text-label-md bg-surface-container-lowest text-primary font-bold shadow-sm transition-all" data-sheet-mode="delivery" type="button">توصيل</button>
+<button class="sheet-mode-btn flex-1 py-1.5 rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" data-sheet-mode="pickup" type="button">استلام فرع</button>
+<button class="sheet-mode-btn flex-1 py-1.5 rounded-lg text-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" data-sheet-mode="dinein" type="button">داخل المحل</button>
+</div>
+<!-- Mode Conditional Dynamic Fields -->
+<div class="flex flex-col gap-1.5" id="field-delivery-block">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-address">عنوان التوصيل أو رابط اللوكيشن *</label>
+<input class="h-11 px-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="input-address" placeholder="مثال: حي الشاطئ، شارع الأمير نايف، بجوار مسجد..." type="text"/>
+</div>
+<div class="hidden flex-col gap-1.5" id="field-dinein-block">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-table">رقم الطاولة *</label>
+<input class="h-11 px-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="input-table" placeholder="مثال: طاولة رقم 4" type="number"/>
+</div>
+<div class="hidden flex-col gap-1.5" id="field-pickup-block">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="select-pickup-time">وقت الاستلام التقريبي</label>
+<select class="h-11 px-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="select-pickup-time">
+<option>بعد 15 دقيقة (فوراً)</option>
+<option>بعد 30 دقيقة</option>
+<option>بعد 45 دقيقة</option>
+<option>بعد ساعة</option>
+</select>
+</div>
+<!-- Customer Contact -->
+<div class="grid grid-cols-1 gap-2.5">
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-name">الاسم الكريم *</label>
+<input class="h-11 px-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="input-name" placeholder="مثال: عبدالله الشمري" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-phone">رقم الجوال للتأكيد *</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-xs text-on-surface-variant font-label-md dir-ltr">966+</span>
+<input class="w-full h-11 pl-12 pr-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md text-right outline-none focus:bg-surface-container-lowest shadow-sm transition-all" dir="ltr" id="input-phone" placeholder="5XXXXXXXX" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="input-notes">ملاحظات خاصة على المعجنات</label>
+<input class="h-11 px-3 rounded-xl bg-surface-container text-on-surface font-body-md text-body-md outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="input-notes" placeholder="مثال: تحمير زيادة، تقليل شطة، بدون بصل..." type="text"/>
+</div>
+</div>
+<!-- Selected Items Breakdown List -->
+<div class="bg-surface-container-low rounded-2xl p-3 flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface font-bold">ملخص الأصناف المختارة</span>
+<div class="flex flex-col gap-2 divide-y-0" id="sheet-items-list">
+<!-- Dynamically populated via JS -->
+</div>
+<div class="pt-2 mt-1 flex flex-col gap-1 border-t-0 bg-surface-container-lowest p-2.5 rounded-xl">
+<div class="flex justify-between items-center text-xs text-on-surface-variant">
+<span>المجموع الفرعي</span>
+<span id="sheet-subtotal">28.00 ر.س</span>
+</div>
+<div class="flex justify-between items-center text-xs text-on-surface-variant">
+<span>رسوم الخدمة والضريبة (15% مشمولة)</span>
+<span class="text-secondary font-medium">مشمولة في الأسعار</span>
+</div>
+<div class="flex justify-between items-center font-bold text-on-surface text-sm pt-1">
+<span>المجموع النهائي</span>
+<span class="font-price-lg text-price-lg text-primary" id="sheet-final-total">28.00 ر.س</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sheet Sticky Action Button -->
+<div class="p-4 pt-2 bg-surface-container-lowest pb-safe">
+<button class="w-full h-12 rounded-xl bg-secondary text-on-secondary font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary/90 transition-transform active:scale-98 shadow-lg shadow-secondary/20" id="send-whatsapp-order-btn" type="button">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span>إرسال الطلب عبر واتساب</span>
+</button>
+<span class="block text-center text-[11px] text-on-surface-variant mt-1.5">سيتم فتح محادثة الواتساب مباشرة مع تفاصيل طلبك لتأكيده</span>
+</div>
+</section>
+</div>
+<script>
+  (function initKingdomMenuApp() {
+    // Initial state matching context (2x chicken kabab malghoom = 28.00 SAR)
+    const cartState = {
+      orderType: 'توصيل',
+      items: {
+        '1': {
+          id: '1',
+          name: 'كباب دجاج ملغوم فطيرة',
+          price: 14.0,
+          quantity: 2,
+          img: 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/2nUwnLwDxLiapdroTtPf.jpeg'
+        }
+      }
+    };
+
+    const elements = {
+      floatingBar: document.getElementById('floating-cart-bar'),
+      badge: document.getElementById('floating-cart-badge'),
+      itemsText: document.getElementById('floating-cart-items-text'),
+      totalText: document.getElementById('floating-cart-total-text'),
+      openModalBtn: document.getElementById('open-checkout-modal-btn'),
+      closeModalBtn: document.getElementById('close-checkout-modal-btn'),
+      backdrop: document.getElementById('checkout-backdrop'),
+      sheet: document.getElementById('checkout-sheet'),
+      sheetItemsList: document.getElementById('sheet-items-list'),
+      sheetSubtotal: document.getElementById('sheet-subtotal'),
+      sheetFinalTotal: document.getElementById('sheet-final-total'),
+      whatsappBtn: document.getElementById('send-whatsapp-order-btn'),
+      searchInput: document.getElementById('menu-search-input'),
+      clearSearchBtn: document.getElementById('clear-search-btn'),
+      orderModeButtons: document.querySelectorAll('.order-mode-btn'),
+      sheetModeButtons: document.querySelectorAll('.sheet-mode-btn'),
+      fieldDelivery: document.getElementById('field-delivery-block'),
+      fieldDinein: document.getElementById('field-dinein-block'),
+      fieldPickup: document.getElementById('field-pickup-block'),
+      inputName: document.getElementById('input-name'),
+      inputPhone: document.getElementById('input-phone'),
+      inputAddress: document.getElementById('input-address'),
+      inputNotes: document.getElementById('input-notes'),
+      inputTable: document.getElementById('input-table'),
+      selectPickupTime: document.getElementById('select-pickup-time')
+    };
+
+    function calculateCart() {
+      let totalCount = 0;
+      let totalPrice = 0.0;
+      for (const id in cartState.items) {
+        const item = cartState.items[id];
+        totalCount += item.quantity;
+        totalPrice += item.quantity * item.price;
+      }
+      return { totalCount, totalPrice: totalPrice.toFixed(2) };
+    }
+
+    function renderItemSlot(itemId) {
+      const slot = document.querySelector(`.action-slot[data-item-id="${itemId}"]`);
+      if (!slot) return;
+
+      const item = cartState.items[itemId];
+      if (item && item.quantity > 0) {
+        slot.innerHTML = `
+          <div class="flex items-center gap-1.5 bg-surface-container rounded-lg p-1 shadow-sm">
+            <button type="button" class="btn-qty-minus w-7 h-7 rounded-md bg-surface-container-lowest text-primary flex items-center justify-center font-bold active:scale-95 transition-transform" data-id="${itemId}">
+              <span class="material-symbols-outlined text-[16px]">${item.quantity === 1 ? 'delete' : 'remove'}</span>
+            </button>
+            <span class="w-6 text-center font-bold text-on-surface text-sm">${item.quantity}</span>
+            <button type="button" class="btn-qty-plus w-7 h-7 rounded-md bg-primary text-on-primary flex items-center justify-center font-bold active:scale-95 transition-transform" data-id="${itemId}">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </button>
+          </div>
+        `;
+      } else {
+        const article = slot.closest('article');
+        const isBigBox = itemId === '8' || itemId === '9';
+        slot.innerHTML = isBigBox 
+          ? `<button type="button" class="add-item-btn px-4 py-2 rounded-lg bg-primary text-on-primary flex items-center gap-1.5 font-label-md text-label-md hover:bg-primary-container transition-transform active:scale-95 shadow-sm"><span class="material-symbols-outlined text-[18px]">add</span><span>أضف للطلب</span></button>`
+          : `<button type="button" class="add-item-btn w-9 h-9 rounded-lg bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-transform active:scale-95 shadow-sm" aria-label="أضف"><span class="material-symbols-outlined text-[20px]">add</span></button>`;
+      }
+    }
+
+    function renderAllSlots() {
+      document.querySelectorAll('.food-item').forEach(article => {
+        const id = article.getAttribute('data-id');
+        renderItemSlot(id);
+      });
+    }
+
+    function renderCartSummary() {
+      const { totalCount, totalPrice } = calculateCart();
+      if (totalCount > 0) {
+        elements.floatingBar.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+        elements.badge.textContent = totalCount;
+        elements.itemsText.textContent = `${totalCount} صنف في السلة`;
+        elements.totalText.textContent = `${totalPrice} ر.س`;
+      } else {
+        elements.floatingBar.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+      }
+
+      // Checkout Sheet Breakdown
+      if (elements.sheetItemsList) {
+        if (totalCount === 0) {
+          elements.sheetItemsList.innerHTML = `<p class="text-xs text-on-surface-variant text-center py-4">السلة فارغة، اختر بعض المعجنات اللذيذة!</p>`;
+        } else {
+          elements.sheetItemsList.innerHTML = Object.values(cartState.items)
+            .filter(item => item.quantity > 0)
+            .map(item => `
+              <div class="flex items-center justify-between py-1 text-xs text-on-surface">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="w-5 h-5 rounded-md bg-surface-container flex items-center justify-center text-primary font-bold text-[11px]">${item.quantity}×</span>
+                  <span class="truncate font-medium">${item.name}</span>
+                </div>
+                <span class="font-bold flex-shrink-0">${(item.quantity * item.price).toFixed(2)} ر.س</span>
+              </div>
+            `).join('');
+        }
+        elements.sheetSubtotal.textContent = `${totalPrice} ر.س`;
+        elements.sheetFinalTotal.textContent = `${totalPrice} ر.س`;
+      }
+    }
+
+    function updateCart(id, delta) {
+      if (!cartState.items[id]) {
+        const article = document.querySelector(`.food-item[data-id="${id}"]`);
+        if (!article) return;
+        cartState.items[id] = {
+          id: id,
+          name: article.getAttribute('data-name'),
+          price: parseFloat(article.getAttribute('data-price')),
+          quantity: 0,
+          img: article.getAttribute('data-img')
+        };
+      }
+
+      cartState.items[id].quantity += delta;
+      if (cartState.items[id].quantity <= 0) {
+        delete cartState.items[id];
+      }
+
+      renderItemSlot(id);
+      renderCartSummary();
+    }
+
+    // Event Delegation for Adding / Quantity Steppers
+    document.addEventListener('click', function(e) {
+      const addBtn = e.target.closest('.add-item-btn');
+      if (addBtn) {
+        const article = addBtn.closest('.food-item');
+        if (article) {
+          const id = article.getAttribute('data-id');
+          updateCart(id, 1);
+        }
+        return;
+      }
+
+      const plusBtn = e.target.closest('.btn-qty-plus');
+      if (plusBtn) {
+        const id = plusBtn.getAttribute('data-id');
+        updateCart(id, 1);
+        return;
+      }
+
+      const minusBtn = e.target.closest('.btn-qty-minus');
+      if (minusBtn) {
+        const id = minusBtn.getAttribute('data-id');
+        updateCart(id, -1);
+        return;
+      }
+    });
+
+    // Modal Sheet Handlers
+    function openCheckout() {
+      elements.backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        elements.backdrop.classList.remove('opacity-0');
+        elements.sheet.classList.remove('translate-y-full');
+      });
+      renderCartSummary();
+    }
+
+    function closeCheckout() {
+      elements.backdrop.classList.add('opacity-0');
+      elements.sheet.classList.add('translate-y-full');
+      setTimeout(() => {
+        elements.backdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    elements.openModalBtn.addEventListener('click', openCheckout);
+    elements.closeModalBtn.addEventListener('click', closeCheckout);
+    elements.backdrop.addEventListener('click', closeCheckout);
+
+    // Mode Switchers
+    function applyOrderMode(mode) {
+      cartState.orderType = mode === 'pickup' ? 'استلام من الفرع' : (mode === 'dinein' ? 'داخل المحل' : 'توصيل');
+      
+      // Update top buttons styling
+      elements.orderModeButtons.forEach(btn => {
+        const match = btn.getAttribute('data-order-type') === mode;
+        btn.classList.toggle('bg-surface-container-lowest', match);
+        btn.classList.toggle('text-primary', match);
+        btn.classList.toggle('font-bold', match);
+        btn.classList.toggle('shadow-sm', match);
+        btn.classList.toggle('text-on-surface-variant', !match);
+      });
+
+      // Update sheet buttons styling
+      elements.sheetModeButtons.forEach(btn => {
+        const match = btn.getAttribute('data-sheet-mode') === mode;
+        btn.classList.toggle('bg-surface-container-lowest', match);
+        btn.classList.toggle('text-primary', match);
+        btn.classList.toggle('font-bold', match);
+        btn.classList.toggle('shadow-sm', match);
+        btn.classList.toggle('text-on-surface-variant', !match);
+      });
+
+      // Toggle sheet inputs visibility
+      elements.fieldDelivery.classList.toggle('hidden', mode !== 'delivery');
+      elements.fieldDinein.classList.toggle('hidden', mode !== 'dinein');
+      elements.fieldPickup.classList.toggle('hidden', mode !== 'pickup');
+    }
+
+    elements.orderModeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-order-type');
+        applyOrderMode(mode);
+      });
+    });
+
+    elements.sheetModeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-sheet-mode');
+        applyOrderMode(mode);
+      });
+    });
+
+    // Search filter logic
+    elements.searchInput.addEventListener('input', function(e) {
+      const q = e.target.value.trim().toLowerCase();
+      elements.clearSearchBtn.classList.toggle('hidden', !q);
+      
+      document.querySelectorAll('.food-item').forEach(item => {
+        const name = (item.getAttribute('data-name') || '').toLowerCase();
+        const desc = (item.querySelector('p')?.textContent || '').toLowerCase();
+        const matches = name.includes(q) || desc.includes(q);
+        item.style.display = matches ? 'flex' : 'none';
+      });
+    });
+
+    elements.clearSearchBtn.addEventListener('click', function() {
+      elements.searchInput.value = '';
+      elements.searchInput.dispatchEvent(new Event('input'));
+      elements.searchInput.focus();
+    });
+
+    // WhatsApp Message Composer
+    elements.whatsappBtn.addEventListener('click', function() {
+      const { totalCount, totalPrice } = calculateCart();
+      if (totalCount === 0) {
+        alert('يرجى اختيار صنف واحد على الأقل قبل إرسال الطلب.');
+        return;
+      }
+
+      const name = elements.inputName.value.trim() || 'عميل مملكة المعجنات';
+      const phone = elements.inputPhone.value.trim();
+      const notes = elements.inputNotes.value.trim();
+
+      let locationInfo = '';
+      if (cartState.orderType === 'توصيل') {
+        const addr = elements.inputAddress.value.trim();
+        locationInfo = `\n📍 *العنوان:* ${addr || 'سيتم إرسال اللوكيشن عبر المحادثة'}`;
+      } else if (cartState.orderType === 'داخل المحل') {
+        const table = elements.inputTable.value.trim();
+        locationInfo = `\n🪑 *رقم الطاولة:* ${table || 'داخل المحل'}`;
+      } else {
+        const pickupTime = elements.selectPickupTime.value;
+        locationInfo = `\n⏱️ *وقت الاستلام:* ${pickupTime}`;
+      }
+
+      const itemsLines = Object.values(cartState.items)
+        .filter(item => item.quantity > 0)
+        .map(item => `▫️ *${item.quantity}x* ${item.name} (${(item.quantity * item.price).toFixed(2)} ر.س)`)
+        .join('\n');
+
+      const message = 
+`السلام عليكم ورحمة الله،
+أود تأكيد الطلب من *مملكة المعجنات*:
+
+🛵 *نوع الطلب:* ${cartState.orderType}${locationInfo}
+👤 *الاسم:* ${name}
+📱 *الجوال:* ${phone || 'نفس رقم الواتساب'}
+
+📋 *الأصناف:*
+${itemsLines}
+
+💰 *الإجمالي النهائي:* ${totalPrice} ر.س
+(الأسعار شاملة ضريبة القيمة المضافة 15%)
+${notes ? `📝 *ملاحظات خاصة:* ${notes}` : ''}
+
+شكراً لكم وبانتظار التأكيد! ✨`;
+
+      const encodedMsg = encodeURIComponent(message);
+      const url = `https://wa.me/966553856006?text=${encodedMsg}`;
+      window.open(url, '_blank');
+    });
+
+    // Initial render
+    renderAllSlots();
+    renderCartSummary();
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(31,41,55,0.08)]" data-active-classes="text-primary font-bold"><div class="h-16 px-space-md flex items-center justify-between max-w-md mx-auto"><a aria-current="page" class="flex flex-col items-center justify-center w-16 h-12 transition-colors text-primary font-bold" data-path="main-menu" href="#"><span class="material-symbols-outlined text-[22px]">bakery_dining</span><span class="font-label-md text-[11px] mt-0.5">القائمة</span></a><a class="flex flex-col items-center justify-center w-16 h-12 text-on-surface-variant transition-colors" data-path="special-offers" href="#"><span class="material-symbols-outlined text-[22px]">local_offer</span><span class="font-label-md text-[11px] mt-0.5">العروض</span></a><a class="flex flex-col items-center justify-center w-16 h-12 text-on-surface-variant transition-colors" data-path="order-tracking" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-md text-[11px] mt-0.5">طلباتي</span></a><a class="flex flex-col items-center justify-center w-16 h-12 text-on-surface-variant transition-colors relative" data-path="view-cart" href="#"><span class="material-symbols-outlined text-[22px]">shopping_bag</span><span class="font-label-md text-[11px] mt-0.5">السلة</span><span class="absolute top-1 left-3 w-4 h-4 bg-primary text-on-primary rounded-full text-[10px] flex items-center justify-center font-bold">2</span></a></div></nav></body></html>

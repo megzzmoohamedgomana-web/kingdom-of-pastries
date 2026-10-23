@@ -1,0 +1,211 @@
+---
+name: Kingdom Crust
+colors:
+  surface: '#f8f9ff'
+  surface-dim: '#d0dbed'
+  surface-bright: '#f8f9ff'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#eff4ff'
+  surface-container: '#e6eeff'
+  surface-container-high: '#dee9fc'
+  surface-container-highest: '#d9e3f6'
+  on-surface: '#121c2a'
+  on-surface-variant: '#554336'
+  inverse-surface: '#27313f'
+  inverse-on-surface: '#eaf1ff'
+  outline: '#887364'
+  outline-variant: '#dbc2b0'
+  surface-tint: '#904d00'
+  primary: '#8d4b00'
+  on-primary: '#ffffff'
+  primary-container: '#b15f00'
+  on-primary-container: '#fffbff'
+  inverse-primary: '#ffb77d'
+  secondary: '#006e2d'
+  on-secondary: '#ffffff'
+  secondary-container: '#7cf994'
+  on-secondary-container: '#007230'
+  tertiary: '#9a4111'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#ba5828'
+  on-tertiary-container: '#fffbff'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#ffdcc3'
+  primary-fixed-dim: '#ffb77d'
+  on-primary-fixed: '#2f1500'
+  on-primary-fixed-variant: '#6e3900'
+  secondary-fixed: '#7ffc97'
+  secondary-fixed-dim: '#62df7d'
+  on-secondary-fixed: '#002109'
+  on-secondary-fixed-variant: '#005320'
+  tertiary-fixed: '#ffdbcd'
+  tertiary-fixed-dim: '#ffb596'
+  on-tertiary-fixed: '#360f00'
+  on-tertiary-fixed-variant: '#7d2d00'
+  background: '#f8f9ff'
+  on-background: '#121c2a'
+  surface-variant: '#d9e3f6'
+typography:
+  display-lg:
+    fontFamily: IBM Plex Sans
+    fontSize: 40px
+    fontWeight: '700'
+    lineHeight: 52px
+  display-lg-mobile:
+    fontFamily: IBM Plex Sans
+    fontSize: 32px
+    fontWeight: '700'
+    lineHeight: 40px
+  headline-lg:
+    fontFamily: IBM Plex Sans
+    fontSize: 28px
+    fontWeight: '700'
+    lineHeight: 36px
+  headline-lg-mobile:
+    fontFamily: IBM Plex Sans
+    fontSize: 24px
+    fontWeight: '700'
+    lineHeight: 32px
+  headline-md:
+    fontFamily: IBM Plex Sans
+    fontSize: 20px
+    fontWeight: '600'
+    lineHeight: 28px
+  headline-sm:
+    fontFamily: IBM Plex Sans
+    fontSize: 18px
+    fontWeight: '600'
+    lineHeight: 26px
+  body-lg:
+    fontFamily: IBM Plex Sans
+    fontSize: 16px
+    fontWeight: '400'
+    lineHeight: 24px
+  body-md:
+    fontFamily: IBM Plex Sans
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 20px
+  body-sm:
+    fontFamily: IBM Plex Sans
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 18px
+  label-lg:
+    fontFamily: IBM Plex Sans
+    fontSize: 14px
+    fontWeight: '600'
+    lineHeight: 20px
+  label-md:
+    fontFamily: IBM Plex Sans
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: 16px
+  price-lg:
+    fontFamily: IBM Plex Sans
+    fontSize: 18px
+    fontWeight: '700'
+    lineHeight: 24px
+  price-md:
+    fontFamily: IBM Plex Sans
+    fontSize: 15px
+    fontWeight: '700'
+    lineHeight: 20px
+rounded:
+  sm: 0.25rem
+  DEFAULT: 0.5rem
+  md: 0.75rem
+  lg: 1rem
+  xl: 1.5rem
+  full: 9999px
+spacing:
+  gutter: 1rem
+  gutter-desktop: 1.5rem
+  margin: 1rem
+  margin-tablet: 1.5rem
+  margin-desktop: 2rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2rem
+  space-2xl: 3rem
+---
+
+## Brand & Style
+
+This design system establishes a clean, high-conversion commercial food ordering experience tailored for the Saudi Arabian bakery and fast-casual dining market. Rooted in culinary tradition yet executed with the precision of market-leading platforms like Hungerstation and Jahez, the interface balances appetite-inducing warmth with structured, transactional clarity.
+
+The visual style leans into modern commercial utility: rich, baked tones paired with crisp white card surfaces against a warm flour-cream backdrop. High-contrast typography ensures swift menu scanning, clear portion customization, and effortless cart checkout. The system strictly avoids decorative novelties or artificial embellishments, relying instead on high-fidelity food imagery, purposeful micro-interactions, clear status cues, and localized RTL-first layouts that convey reliability, speed, and oven-fresh quality.
+
+## Colors
+
+The palette draws directly from the bakery craft:
+- **Primary (`#D97706`)**: Golden crust amber. Used for primary CTAs (e.g., "Add to Cart", "Checkout"), active category states, order progress indicators, and key touchpoints.
+- **Secondary (`#16A34A`)**: Fresh mint/herb green. Serves as the functional accent for freshness highlights, vegetarian/dietary indicators, success states, and live delivery status milestones.
+- **Tertiary (`#C25E2E`)**: Baked terracotta. Utilized for special offers, limited-time combos, and subtle promotional badges.
+- **Neutral Base & Canvas**: 
+  - Canvas Background: `#FDFBF7` (a warm, comforting off-white cream that softens interface contrast).
+  - Surface Elevation: Pure white `#FFFFFF` for product tiles, floating sheets, and modals.
+  - Border/Dividers: Low-opacity warm neutral `#E5E0D8`.
+  - Content Text: `#1F2937` (slate charcoal) for headlines and high-contrast body text, with `#6B7280` reserved for secondary subtitles and metadata.
+
+## Typography
+
+The typography system relies on IBM Plex Sans (and its unified Arabic counterpart IBM Plex Sans Arabic). It offers crisp geometric legibility, upright structural weight, and balanced metrics across both Arabic and Latin scripts.
+
+- **RTL & LTR Balance**: Arabic and English labels share optical sizing, ensuring that dual-language menu switching causes zero layout shift.
+- **Prices and Currency**: Standardized using `price-lg` and `price-md` in bold weights, pairing the Saudi Riyal symbol (ر.س) directly with the numeric value without excessive spacing.
+- **Readability**: Headings maintain tight letter spacing with deliberate line heights to accommodate Arabic diacritics and ascenders naturally.
+
+## Layout & Spacing
+
+The layout is built around mobile-first utility with responsive scaling up to desktop viewing:
+- **Mobile (< 768px)**: Single column with edge-to-edge category chips, 16px lateral padding (`margin: 1rem`), and compact vertical stacks. A fixed bottom sticky checkout bar handles order actions.
+- **Tablet (768px - 1024px)**: 2-column food grid with 24px gutters and margins.
+- **Desktop (> 1024px)**: 12-column layout maxing out at 1280px container width. Utilizes a 3-column split: left/right navigation and category sidebar (depending on RTL direction), central 8-column food and combo catalog, and a persistent 4-column live order/cart panel.
+
+Whitespace maintains a tight, clean rhythm, avoiding unnecessary vast gaps to preserve the commercial ordering tempo.
+
+## Elevation & Depth
+
+Visual hierarchy leverages crisp card boundaries, surface separation, and ambient warm shadows rather than heavy borders or deep dark drop shadows:
+
+- **Flat Canvas (`z-0`)**: Base background in warm cream (`#FDFBF7`).
+- **Surface Elevation (`z-1`)**: Product cards, category segments, and list items sit on `#FFFFFF` with a subtle, warm-tinted shadow: `box-shadow: 0 2px 8px rgba(180, 130, 80, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04)`.
+- **Raised Elevation (`z-2`)**: Active chips, hovering cards, and quantity steppers: `box-shadow: 0 4px 12px rgba(180, 130, 80, 0.10)`.
+- **Floating Overlays & Sticky Bars (`z-3`)**: Sticky bottom navigation, cart bars, and item customization bottom-sheets: `box-shadow: 0 -4px 16px rgba(31, 41, 55, 0.08)`.
+
+## Shapes
+
+The design system incorporates roundedness level `2`:
+- **Base Components (Inputs, Buttons, Cards)**: `rounded-md` (0.5rem / 8px) to `rounded-lg` (1rem / 16px), giving food cards, modal dialogs, and banners a friendly, dough-soft commercial touch.
+- **Chips & Status Tags**: Fully pill-shaped for easy horizontal flicking and tactile selection.
+- **Image Containers**: Consistent `rounded-lg` (16px) with masked corners so product photography integrates smoothly with surrounding card surfaces.
+
+## Components
+
+### Buttons
+- **Primary**: Solid golden amber (`#D97706`) with white text, font weight 600, height 48px on mobile (52px on desktop), `rounded-lg`. Active tap scales down to `0.98` for tactile feedback.
+- **Secondary**: Crisp white background with neutral border (`#E5E0D8`) and charcoal text (`#1F2937`).
+- **Add (+) Quick Action**: Floating circular or rounded-square button (+ icon) on card thumbnails that transforms instantly into an inline quantity stepper when selected.
+
+### Chips & Category Tabs
+- Pill-shaped horizontally scrolling filters.
+- **Default**: White surface, faint `#E5E0D8` border, `#6B7280` text.
+- **Selected**: Solid `#D97706` with white text, or deep charcoal `#1F2937` for sub-filter sorting.
+
+### Cards
+- **Product Card (Grid)**: White `#FFFFFF` card, 16px corner radius, top image container (aspect ratio 4:3) with object-fit cover, bold item title, truncated 2-line description, bottom row with price (`#D97706`) and (+) CTA.
+- **Horizontal Combo Card**: Horizontal presentation featuring image on the leading side (right in RTL, left in LTR) and order options on the trailing side.
+
+### Inputs & Quantity Steppers
+- **Search & Special Instructions**: `#FFFFFF` background with 1px border (`#E5E0D8`), transitioning to `#D97706` ring on focus.
+- **Quantity Stepper**: Compact container with minus (`-`), count, and plus (`+`) buttons, ensuring touch targets are minimum 36px by 36px.
+
+### Order Tracker & Badges
+- **Status Badges**: Pill badges indicating "Baking" (warm terracotta), "Ready" (golden amber), or "Out for Delivery" (herb green).
+- **Dietary Icons**: Clean green dot or small leaf glyph for cheese, spinach (fatayer), or vegetarian items.

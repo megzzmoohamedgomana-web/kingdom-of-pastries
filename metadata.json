@@ -1,0 +1,6 @@
+{
+  "name": "مملكة المعجنات | Kingdom of Pastries",
+  "description": "قائمة طعام وطلب إلكتروني فاخر لمخبوزات وفطائر مملكة المعجنات مع التوصيل والاستلام المباشر عبر الواتساب",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
