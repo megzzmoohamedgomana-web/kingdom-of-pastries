@@ -33,6 +33,34 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ activeCategory, onSele
 
   return (
     <nav className="sticky top-[64px] z-30 bg-[#f8f9ff]/95 backdrop-blur-md shadow-xs py-2.5 px-3 overflow-x-auto no-scrollbar flex items-start gap-3 border-b border-[#e6eeff]">
+      {/* 'All' button - shows all dishes across all categories */}
+      <button
+        type="button"
+        onClick={() => onSelectCategory('')}
+        className={`flex-shrink-0 flex flex-col items-center gap-1.5 transition-all outline-none group cursor-pointer ${
+          !activeCategory ? 'scale-105' : 'hover:scale-[1.02] opacity-80 hover:opacity-100'
+        }`}
+      >
+        <div
+          className={`relative w-16 h-16 sm:w-18 sm:h-18 rounded-2xl p-0.5 transition-all shadow-xs flex flex-col items-center justify-center ${
+            !activeCategory
+              ? 'ring-2 ring-[#8d4b00] ring-offset-2 ring-offset-[#f8f9ff] bg-[#8d4b00] text-white shadow-sm'
+              : 'border border-slate-200/90 bg-white text-slate-700 hover:border-[#8d4b00]/40'
+          }`}
+        >
+          <span className="material-symbols-outlined text-[28px]">
+            restaurant_menu
+          </span>
+        </div>
+        <span
+          className={`text-[11px] sm:text-xs font-bold text-center line-clamp-1 max-w-[70px] sm:max-w-[78px] transition-colors leading-tight ${
+            !activeCategory ? 'text-[#8d4b00]' : 'text-[#121c2a] group-hover:text-[#8d4b00]'
+          }`}
+        >
+          الكل
+        </span>
+      </button>
+
       {categories.map((cat) => {
         const isActive = activeCategory === cat.id;
 
@@ -48,7 +76,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ activeCategory, onSele
           <button
             key={cat.id}
             type="button"
-            onClick={() => onSelectCategory(cat.id)}
+            onClick={() => onSelectCategory(isActive ? '' : cat.id)}
             className={`flex-shrink-0 flex flex-col items-center gap-1.5 transition-all outline-none group cursor-pointer ${
               isActive ? 'scale-105' : 'hover:scale-[1.02] opacity-80 hover:opacity-100'
             }`}
@@ -71,12 +99,6 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ activeCategory, onSele
                 }}
                 className="w-full h-full object-cover rounded-[14px]"
               />
-
-              {cat.badge && (
-                <span className="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full bg-[#8d4b00] text-white text-[9px] font-bold shadow-xs leading-none">
-                  {cat.badge}
-                </span>
-              )}
             </div>
 
             {/* Category Name Beneath Photo */}

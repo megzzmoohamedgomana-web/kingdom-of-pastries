@@ -5,7 +5,7 @@ interface HeaderProps {
   onOpenAdmin?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenAdmin }) => {
+export const Header: React.FC<HeaderProps> = () => {
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false);
 
   return (
@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAdmin }) => {
             </div>
           </div>
 
-          {/* Header Actions: Branches & Admin */}
+          {/* Header Actions: Branches Location */}
           <div className="flex items-center gap-2 flex-shrink-0">
             {/* Branch Locations */}
             <button
@@ -45,17 +45,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAdmin }) => {
               title="عرض الفروع ومواقعها"
             >
               <span className="material-symbols-outlined text-[19px]">location_on</span>
-            </button>
-
-            {/* Admin Access Button */}
-            <button
-              type="button"
-              onClick={onOpenAdmin}
-              aria-label="لوحة تحكم الإدارة"
-              className="w-9 h-9 rounded-full bg-[#8d4b00] text-white flex items-center justify-center hover:bg-[#b15f00] transition-transform active:scale-95 shadow-xs flex-shrink-0"
-              title="دخول لوحة تحكم الإدارة (/admin)"
-            >
-              <span className="material-symbols-outlined text-[18px]">admin_panel_settings</span>
             </button>
           </div>
         </div>

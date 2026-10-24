@@ -14,6 +14,8 @@ import { SpecialOffersView } from './components/SpecialOffersView';
 import { BranchesView } from './components/BranchesView';
 import { BranchSelectorModal } from './components/BranchSelectorModal';
 import { AdminPanel } from './components/AdminPanel';
+import { DishDetailModal } from './components/DishDetailModal';
+import { MenuItem } from './data/menuData';
 
 const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin }) => {
   const {
@@ -28,17 +30,16 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
 
   const [activeCategory, setActiveCategory] = useState<string>('');
   const [isBranchModalOpen, setIsBranchModalOpen] = useState(false);
+  const [selectedDish, setSelectedDish] = useState<MenuItem | null>(null);
 
-  // Set initial active category when categories load from Supabase
-  useEffect(() => {
-    if (categories.length > 0 && !activeCategory) {
-      setActiveCategory(categories[0].id);
-    }
-  }, [categories, activeCategory]);
-
-  // Filter items based on activeFilter and searchQuery
+  // Filter items based on activeCategory and searchQuery
   const filteredItems = useMemo(() => {
     return menuItems.filter((item) => {
+      // Category filter (if selected)
+      if (activeCategory && item.category_id !== activeCategory) {
+        return false;
+      }
+
       // Search match
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -48,23 +49,18 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
         if (!matchesName && !matchesDesc && !matchesCat) return false;
       }
 
-      // Quick filter tags
-      if (activeFilter === 'bestseller' && !item.is_bestseller) return false;
-      if (activeFilter === 'veg' && !item.is_veg) return false;
-      if (activeFilter === 'fast' && !item.is_quick) return false;
-      if (activeFilter === 'offers' && !item.is_family_box && !item.is_bestseller) return false;
-
       return true;
     });
-  }, [menuItems, searchQuery, activeFilter]);
+  }, [menuItems, activeCategory, searchQuery]);
 
+  // If activeCategory is empty (''), all categories and items are shown
   const handleSelectCategory = (categoryId: string) => {
     setActiveCategory(categoryId);
-    const element = document.getElementById(`section-${categoryId}`);
+    const element = document.getElementById('catalog-content-start');
     if (element) {
       const yOffset = -140;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
   };
 
@@ -80,7 +76,7 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
       />
 
       {/* Sections Container */}
-      <div className="px-4 flex flex-col gap-6 pt-4 max-w-md mx-auto w-full">
+      <div id="catalog-content-start" className="px-4 flex flex-col gap-6 pt-4 max-w-md mx-auto w-full">
         {/* Loading Skeleton */}
         {isLoadingMenu && (
           <div className="flex flex-col gap-3 py-6">
@@ -143,22 +139,65 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
           </div>
         )}
 
-        {/* Filtered Dishes Rendering */}
+        {/* Active Category Filter Indicator */}
+        {activeCategory && (
+          <div className="flex items-center justify-between bg-[#eff4ff] border border-[#e6eeff] px-3.5 py-2.5 rounded-xl shadow-2xs">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-[#8d4b00] text-[18px]">
+                filter_alt
+              </span>
+              <span className="text-xs font-bold text-[#121c2a]">
+                عرض قسم:{' '}
+                <span className="text-[#8d4b00]">
+                  {categories.find((c) => c.id === activeCategory)?.name || activeCategory}
+                </span>
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveCategory('')}
+              className="text-xs font-bold text-[#8d4b00] hover:text-[#b15f00] flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs cursor-pointer transition-colors"
+            >
+              <span>عرض كل الأقسام</span>
+              <span className="material-symbols-outlined text-[14px]">close</span>
+            </button>
+          </div>
+        )}
+
+        {/* Empty state when filtering */}
         {!isLoadingMenu && menuItems.length > 0 && filteredItems.length === 0 && (
-          <div className="py-12 text-center bg-white rounded-2xl p-6 shadow-sm border border-slate-100 my-4">
+          <div className="py-12 text-center bg-white rounded-2xl p-6 shadow-sm border border-slate-100 my-4 flex flex-col items-center gap-2">
             <span className="material-symbols-outlined text-[44px] text-slate-400">
-              search_off
+              {activeCategory ? 'inventory_2' : 'search_off'}
             </span>
-            <h3 className="font-bold text-base text-slate-800 mt-2">لا توجد نتائج مطابقة</h3>
-            <p className="text-xs text-slate-500 mt-1">
-              جرب البحث عن كلمات أخرى أو إلغاء التصفية
+            <h3 className="font-bold text-base text-slate-800">
+              {activeCategory
+                ? 'لا توجد أصناف في هذا القسم حالياً'
+                : 'لا توجد نتائج مطابقة للبحث'}
+            </h3>
+            <p className="text-xs text-slate-500">
+              {activeCategory
+                ? 'يمكنك التبديل إلى قسم آخر أو عرض جميع الأصناف'
+                : 'جرب البحث بكلمات أخرى أو مسح نص البحث'}
             </p>
+            {activeCategory && (
+              <button
+                type="button"
+                onClick={() => setActiveCategory('')}
+                className="mt-2 px-4 py-2 rounded-xl bg-[#8d4b00] text-white text-xs font-bold hover:bg-[#b15f00] cursor-pointer shadow-xs"
+              >
+                عرض كل الأقسام
+              </button>
+            )}
           </div>
         )}
 
         {/* Categories & Items from Supabase */}
         {!isLoadingMenu &&
-          categories.map((category) => {
+          (activeCategory
+            ? categories.filter((c) => c.id === activeCategory)
+            : categories
+          ).map((category) => {
             const sectionItems = filteredItems.filter(
               (item) => item.category_id === category.id
             );
@@ -179,55 +218,31 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
                       {category.name}
                     </h2>
                   </div>
-                  {category.badge && (
-                    <span className="px-2 py-0.5 rounded-full bg-[#eff4ff] text-[#8d4b00] text-[11px] font-bold border border-[#e6eeff]">
-                      {category.badge}
-                    </span>
-                  )}
+                  <span className="text-xs font-semibold text-slate-500">
+                    {sectionItems.length} {sectionItems.length === 1 ? 'صنف' : 'أصناف'}
+                  </span>
                 </div>
 
                 {/* Items Grid */}
                 <div className="flex flex-col gap-3">
                   {sectionItems.map((item) => (
-                    <FoodCard key={item.id} item={item} />
+                    <FoodCard
+                      key={item.id}
+                      item={item}
+                      onClick={() => setSelectedDish(item)}
+                    />
                   ))}
                 </div>
               </section>
             );
           })}
-
-        {/* Quality Guarantee Card */}
-        <section className="bg-[#eff4ff] rounded-2xl p-4 flex items-center gap-3.5 border border-[#e6eeff] shadow-xs my-2">
-          <div className="w-12 h-12 rounded-xl bg-white text-[#8d4b00] flex items-center justify-center flex-shrink-0 shadow-sm">
-            <span
-              className="material-symbols-outlined text-[28px]"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              verified
-            </span>
-          </div>
-          <div>
-            <h3 className="font-bold text-sm text-[#121c2a]">
-              طازج من الفرن إلى مائدتك
-            </h3>
-            <p className="text-xs text-[#554336] mt-0.5 leading-relaxed">
-              نعجن ونخبز طوال اليوم بأجود أنواع الدقيق والجبن واللحوم الطازجة.
-            </p>
-          </div>
-        </section>
-
-        {/* Footer Admin Entry */}
-        <div className="text-center py-3">
-          <button
-            type="button"
-            onClick={onOpenAdmin}
-            className="text-[11px] text-slate-400 hover:text-[#8d4b00] inline-flex items-center gap-1 transition-colors"
-          >
-            <span className="material-symbols-outlined text-[14px]">lock</span>
-            <span>دخول لوحة تحكم الإدارة (/admin)</span>
-          </button>
-        </div>
       </div>
+
+      {/* Dish Details Modal */}
+      <DishDetailModal
+        item={selectedDish}
+        onClose={() => setSelectedDish(null)}
+      />
 
       <BranchSelectorModal
         isOpen={isBranchModalOpen}
