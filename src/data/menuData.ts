@@ -29,6 +29,7 @@ export interface Category {
   id: string;
   name: string;
   badge?: string;
+  image_url?: string;
   sort_order?: number;
 }
 

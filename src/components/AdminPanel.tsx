@@ -46,6 +46,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
   // Category Edit/Create State
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Partial<Category> | null>(null);
+  const [isUploadingCategoryPhoto, setIsUploadingCategoryPhoto] = useState(false);
 
   // Offer Edit/Create State
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
@@ -190,6 +191,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
   };
 
   // Category Operations
+  const handleCategoryPhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsUploadingCategoryPhoto(true);
+      const publicUrl = await uploadPhotoToSupabase(file);
+      setEditingCategory((prev) => (prev ? { ...prev, image_url: publicUrl } : null));
+      showStatus('تم رفع صورة القسم إلى سوبابيس بنجاح!');
+    } catch (err: any) {
+      showStatus(`فشل رفع صورة القسم: ${err.message || 'خطأ في سوبابيس'}`, 'error');
+    } finally {
+      setIsUploadingCategoryPhoto(false);
+    }
+  };
+
   const handleSaveCategory = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingCategory?.name?.trim()) return;
@@ -201,11 +218,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
         id: catId,
         name: editingCategory.name.trim(),
         badge: editingCategory.badge?.trim() || '',
+        image_url: editingCategory.image_url?.trim() || '',
         sort_order: Number(editingCategory.sort_order) || 0
       });
       await reloadMenu();
       setIsCategoryModalOpen(false);
-      showStatus('تم حفظ التصنيف بنجاح في سوبابيس');
+      showStatus('تم حفظ التصنيف وصورته بنجاح في سوبابيس');
     } catch (err: any) {
       showStatus(`فشل حفظ التصنيف: ${err.message}`, 'error');
     } finally {
@@ -668,7 +686,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
               <button
                 type="button"
                 onClick={() => {
-                  setEditingCategory({ id: '', name: '', badge: '', sort_order: categories.length + 1 });
+                  setEditingCategory({ id: '', name: '', badge: '', image_url: '', sort_order: categories.length + 1 });
                   setIsCategoryModalOpen(true);
                 }}
                 className="h-10 px-4 rounded-xl bg-[#8d4b00] text-white font-bold text-xs flex items-center gap-1.5 hover:bg-[#b15f00]"
@@ -682,20 +700,35 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
               {categories.map((cat) => (
                 <div
                   key={cat.id}
-                  className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-between"
+                  className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-between gap-3"
                 >
-                  <div>
-                    <h4 className="font-bold text-sm text-slate-900">{cat.name}</h4>
-                    <span className="text-[11px] text-slate-500 block mt-0.5">
-                      المعرف: <code className="text-[#8d4b00]">{cat.id}</code>
-                    </span>
-                    {cat.badge && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 inline-block mt-1">
-                        بادج: {cat.badge}
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                      {cat.image_url ? (
+                        <img
+                          src={cat.image_url}
+                          alt={cat.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="material-symbols-outlined text-slate-400 text-[20px]">
+                          photo_library
+                        </span>
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="font-bold text-sm text-slate-900 truncate">{cat.name}</h4>
+                      <span className="text-[11px] text-slate-500 block truncate">
+                        المعرف: <code className="text-[#8d4b00]">{cat.id}</code>
                       </span>
-                    )}
+                      {cat.badge && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 inline-block mt-0.5">
+                          {cat.badge}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 flex-shrink-0">
                     <button
                       type="button"
                       onClick={() => {
@@ -703,6 +736,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
                         setIsCategoryModalOpen(true);
                       }}
                       className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      title="تعديل القسم والصورة"
                     >
                       <span className="material-symbols-outlined text-[16px]">edit</span>
                     </button>
@@ -710,6 +744,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
                       type="button"
                       onClick={() => handleDeleteCategory(cat.id, cat.name)}
                       className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100"
+                      title="حذف"
                     >
                       <span className="material-symbols-outlined text-[16px]">delete</span>
                     </button>
@@ -837,14 +872,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onClose }) => {
             </div>
 
             <div className="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto max-h-[500px] dir-ltr text-left">
-              <pre>{`-- 1. Create Categories Table
+              <pre>{`-- 1. Create Categories Table (With image_url support)
 CREATE TABLE IF NOT EXISTS public.categories (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     badge TEXT DEFAULT '',
+    image_url TEXT DEFAULT '',
     sort_order INTEGER DEFAULT 0,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
+ALTER TABLE public.categories ADD COLUMN IF NOT EXISTS image_url TEXT DEFAULT '';
 
 -- 2. Create Menu Items Table
 CREATE TABLE IF NOT EXISTS public.menu_items (
@@ -1307,6 +1344,52 @@ CREATE POLICY "Allow delete photos" ON storage.objects FOR DELETE USING (bucket_
                   placeholder="مثال: طازج من الفرن"
                   className="w-full h-10 px-3 rounded-xl bg-slate-50 border border-slate-200 text-xs outline-none"
                 />
+              </div>
+
+              {/* Category Photo Upload & Preview */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  صورة القسم / التصنيف (التي تظهر للزبائن في المنيو)
+                </label>
+                <div className="flex items-center gap-3">
+                  <div className="w-16 h-16 rounded-2xl bg-slate-100 border border-slate-200 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                    {editingCategory.image_url ? (
+                      <img
+                        src={editingCategory.image_url}
+                        alt="معاينة صورة القسم"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="material-symbols-outlined text-slate-400 text-[26px]">
+                        image
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    <label className="cursor-pointer inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-colors">
+                      <span className="material-symbols-outlined text-[16px]">cloud_upload</span>
+                      <span>
+                        {isUploadingCategoryPhoto ? 'جاري الرفع إلى سوبابيس...' : 'رفع صورة من الجهاز'}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        disabled={isUploadingCategoryPhoto}
+                        onChange={handleCategoryPhotoUpload}
+                        className="hidden"
+                      />
+                    </label>
+                    <input
+                      type="url"
+                      value={editingCategory.image_url || ''}
+                      onChange={(e) =>
+                        setEditingCategory({ ...editingCategory, image_url: e.target.value })
+                      }
+                      placeholder="أو ضع رابط صورة مباشر (URL)..."
+                      className="w-full h-8 px-2.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px] outline-none"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">

@@ -17,6 +17,7 @@ export async function fetchCategories(): Promise<Category[]> {
     id: row.id,
     name: row.name,
     badge: row.badge || '',
+    image_url: row.image_url || '',
     sort_order: row.sort_order || 0
   }));
 }
@@ -135,6 +136,7 @@ export async function saveCategory(category: Category): Promise<Category> {
       id: category.id,
       name: category.name,
       badge: category.badge || '',
+      image_url: category.image_url || '',
       sort_order: category.sort_order || 0
     })
     .select()

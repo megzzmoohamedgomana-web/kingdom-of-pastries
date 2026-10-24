@@ -4,14 +4,18 @@
 -- Dashboard -> SQL Editor -> New Query -> Run
 -- ========================================================
 
--- 1. Create Categories Table
+-- 1. Create Categories Table (With image_url support)
 CREATE TABLE IF NOT EXISTS public.categories (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     badge TEXT DEFAULT '',
+    image_url TEXT DEFAULT '',
     sort_order INTEGER DEFAULT 0,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Ensure image_url column exists if table was created previously
+ALTER TABLE public.categories ADD COLUMN IF NOT EXISTS image_url TEXT DEFAULT '';
 
 -- 2. Create Menu Items Table
 CREATE TABLE IF NOT EXISTS public.menu_items (
@@ -97,25 +101,34 @@ CREATE POLICY "Allow delete photos" ON storage.objects FOR DELETE USING (bucket_
 
 
 -- ========================================================
--- 6. Insert Default Categories
+-- 6. Insert All 16 Categories (With Real Photo URLs)
 -- ========================================================
-INSERT INTO public.categories (id, name, badge, sort_order) VALUES
-('fresh', 'جديدنا كله فريش !', 'مخبوز طازج', 1),
-('zaatar', 'الزعتر الأصيل', 'فرن حجري', 2),
-('family', 'البيتزا والوجبات العائلية', 'مثالي للمشاركة', 3),
-('falafel', 'فلافل ولبنة', 'بلدي فاخر', 4),
-('cheese', 'الجبن والسبانخ', 'خلطات خاصة', 5),
-('meat', 'المشويات واللحم', 'مشوي عالسيخ', 6),
-('cafeteria', 'كافتيريا وصباح الملكة', 'فطور ملكي', 7),
-('sweets-drinks', 'حلا والمشروبات', 'لذيذ ومنعش', 8)
+INSERT INTO public.categories (id, name, badge, image_url, sort_order) VALUES
+('fresh', 'جديدنا كله فريش !', 'مخبوز طازج', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/2nUwnLwDxLiapdroTtPf.jpeg', 1),
+('zaatar', 'الزعتر', 'فرن حجري', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554474-1.jpg', 2),
+('falafel', 'فلافل', 'مقرمش وساخن', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641972211QEuV9C.jpeg', 3),
+('labneh', 'لبنة', 'طازج بلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641974495grEitv.jpeg', 4),
+('cheese', 'الجبن', 'خلطات خاصة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612553957-4.jpg', 5),
+('spinach', 'سبانخ', 'حامض بلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/cWiHFeiNBMXukPi4WrEI.jpeg', 6),
+('meat', 'لحم', 'طازج يومياً', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/BncMseRdiY9uUV7n4kaX.jpg', 7),
+('grills', 'المشويات', 'مشوي عالسيخ', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/CX6S_BtqFZ75bFAj674g.jpeg', 8),
+('hotdog', 'هوت دوج', 'شيدر ذائب', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641972048Lyq3sg.jpeg', 9),
+('pizza', 'البيتزا', 'عجينة ذهبية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg', 10),
+('family', 'الوجبات العائلية', 'بوكسات ومشاركات', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/kbtsxPCmTABRtzB5iSpe.jpg', 11),
+('sweets', 'حلا', 'لذيذ ومقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642067383W5gcR2.jpg', 12),
+('drinks', 'المشروبات', 'بارد ومنعش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591386-2.jpg', 13),
+('morning', 'صباح الملكة', 'فطور ملكي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/JGekrN7u3Xfo8iO63BC4.jpeg', 14),
+('cafeteria', 'كافتيريا الملكة', 'طازج وسريع', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/5KP5rgTRf7XLClHojZkA.png', 15),
+('sauces', 'الصوصات', 'نكهات إضافية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/zXQo69Jw2gSQo_s2urZR.png', 16)
 ON CONFLICT (id) DO UPDATE SET
     name = EXCLUDED.name,
     badge = EXCLUDED.badge,
+    image_url = EXCLUDED.image_url,
     sort_order = EXCLUDED.sort_order;
 
 
 -- ========================================================
--- 7. Insert All Dishes & Menu Items
+-- 7. Insert All Dishes & Menu Items (Direct Supabase Source)
 -- ========================================================
 INSERT INTO public.menu_items 
 (id, category_id, category_name, name, price, calories, description, image_url, is_available, has_sizes, sizes, is_bestseller, is_spicy, is_veg, is_quick, is_family_box, sort_order) 
@@ -138,20 +151,22 @@ VALUES
 ('zaatar-2', 'zaatar', 'الزعتر', 'زعتر مملكة المعجنات', 6.00, '620', 'خلطة زعتر خاصة بالمملكة مع رشة سمسم وخضار مشكلة وجبن موزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554557-2.jpg', true, false, '[]', true, false, true, true, false, 13),
 ('zaatar-3', 'zaatar', 'الزعتر', 'زعتر مشكل', 8.00, '620', 'زعتر مشكل مع إضافات جبنة وخضار طازجة مخبوزة حتى القرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554687-3.jpg', true, false, '[]', false, false, true, true, false, 14),
 
--- فلافل ولبنة
+-- فلافل
 ('falafel-1', 'falafel', 'فلافل', 'فطيرة فلافل سادة', 5.00, '700', 'فطيرة فلافل سادة طازجة ومقرمشة مع طحينة وطماطم ومخلل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641972211QEuV9C.jpeg', true, false, '[]', false, false, true, true, false, 15),
 ('falafel-2', 'falafel', 'فلافل', 'فلافل باللبنة', 8.00, '780', 'فلافل ذهبية مع اللبنة التركية الطازجة والنعناع', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554945-22.jpg', true, false, '[]', true, false, true, true, false, 16),
 ('falafel-3', 'falafel', 'فلافل', 'فلافل شيدر', 8.00, '820', 'فلافل مع جبن شيدر ذائب يمنحها قواماً كريمياً لا يقاوم', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555009-33.jpg', true, false, '[]', false, false, true, true, false, 17),
-('labneh-1', 'falafel', 'لبنة', 'لبنة سادة', 7.00, '500', 'لبنة طازجة سادة مع قطرات زيت الزيتون البكر', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641974495grEitv.jpeg', true, false, '[]', false, false, true, true, false, 18),
-('labneh-2', 'falafel', 'لبنة', 'لبنة بالجبن', 8.00, '580', 'مزيج اللبنة الحامضة مع الجبن الأبيض الكريمي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555462-2.jpg', true, false, '[]', false, false, true, true, false, 19),
-('labneh-3', 'falafel', 'لبنة', 'لبنة بالذرة', 9.00, '640', 'لبنة مع حبات الذرة الحلوة والموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555542-3.jpg', true, false, '[]', false, false, true, false, false, 20),
-('labneh-4', 'falafel', 'لبنة', 'لبنة بالزعتر', 8.00, '520', 'لبنة متبلة بالزعتر الأخضر البلدي وزيت الزيتون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555627-4.jpg', true, false, '[]', true, false, true, true, false, 21),
-('labneh-5', 'falafel', 'لبنة', 'لبنة بالزيتون', 9.00, '510', 'لبنة مع شرائح الزيتون الأسود والأخضر المخلي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555698-5.jpg', true, false, '[]', false, false, true, true, false, 22),
-('labneh-6', 'falafel', 'لبنة', 'لبنة بالجبن والزعتر', 10.00, '610', 'مزيج ثلاثي شهي من اللبنة والجبن والزعتر البلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555954-8.jpg', true, false, '[]', false, false, true, true, false, 23),
-('labneh-7', 'falafel', 'لبنة', 'لبنة بالجبن والبيض', 12.00, '630', 'لبنة غنية مع جبن وبيض مخفوق ومخبوز بالفرن', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612556038-9.jpg', true, false, '[]', false, false, true, false, false, 24),
-('labneh-8', 'falafel', 'لبنة', 'لبنة جبن زيتون', 10.00, '590', 'لبنة وجبن وزيتون مشكل على العجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612556151-10.jpg', true, false, '[]', false, false, true, true, false, 25),
 
--- الجبن والسبانخ
+-- لبنة
+('labneh-1', 'labneh', 'لبنة', 'لبنة سادة', 7.00, '500', 'لبنة طازجة سادة مع قطرات زيت الزيتون البكر', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641974495grEitv.jpeg', true, false, '[]', false, false, true, true, false, 18),
+('labneh-2', 'labneh', 'لبنة', 'لبنة بالجبن', 8.00, '580', 'مزيج اللبنة الحامضة مع الجبن الأبيض الكريمي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555462-2.jpg', true, false, '[]', false, false, true, true, false, 19),
+('labneh-3', 'labneh', 'لبنة', 'لبنة بالذرة', 9.00, '640', 'لبنة مع حبات الذرة الحلوة والموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555542-3.jpg', true, false, '[]', false, false, true, false, false, 20),
+('labneh-4', 'labneh', 'لبنة', 'لبنة بالزعتر', 8.00, '520', 'لبنة متبلة بالزعتر الأخضر البلدي وزيت الزيتون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555627-4.jpg', true, false, '[]', true, false, true, true, false, 21),
+('labneh-5', 'labneh', 'لبنة', 'لبنة بالزيتون', 9.00, '510', 'لبنة مع شرائح الزيتون الأسود والأخضر المخلي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555698-5.jpg', true, false, '[]', false, false, true, true, false, 22),
+('labneh-6', 'labneh', 'لبنة', 'لبنة بالجبن والزعتر', 10.00, '610', 'مزيج ثلاثي شهي من اللبنة والجبن والزعتر البلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612555954-8.jpg', true, false, '[]', false, false, true, true, false, 23),
+('labneh-7', 'labneh', 'لبنة', 'لبنة بالجبن والبيض', 12.00, '630', 'لبنة غنية مع جبن وبيض مخفوق ومخبوز بالفرن', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612556038-9.jpg', true, false, '[]', false, false, true, false, false, 24),
+('labneh-8', 'labneh', 'لبنة', 'لبنة جبن زيتون', 10.00, '590', 'لبنة وجبن وزيتون مشكل على العجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612556151-10.jpg', true, false, '[]', false, false, true, true, false, 25),
+
+-- الجبن
 ('cheese-1', 'cheese', 'الجبن', 'الأجبان الثلاثة خبز بالثوم', 9.00, '573', 'تشكيلة أجبان فاخرة بخبز الثوم المميز والأعشاب الإيطالية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612553957-4.jpg', true, false, '[]', true, false, true, false, false, 26),
 ('cheese-2', 'cheese', 'الجبن', 'الأجبان الثلاثة خبز عادي', 8.00, '571', 'تشكيلة أجبان غنية بالعجينة الذهبية الكلاسيكية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612554060-5.jpg', true, false, '[]', false, false, true, false, false, 27),
 ('cheese-3', 'cheese', 'الجبن', 'جبن حلوم البستو', 12.00, '590', 'جبن حلوم مشوي مع صلصة البستو الإيطالية وقطع الطماطم الكرزية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/fPw-NpT1GnZobKJrAA2K.jpeg', true, false, '[]', true, false, true, false, false, 28),
@@ -161,33 +176,39 @@ VALUES
 ('cheese-7', 'cheese', 'الجبن', 'موزاريلا بالبيض', 10.00, '590', 'موزاريلا مع بيض طازج ورشة فلفل أسود', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/KRDIYHoAU4j4t4z2l4SQ.jpeg', true, false, '[]', false, false, true, false, false, 32),
 ('cheese-8', 'cheese', 'الجبن', 'جبن سائل', 8.00, '580', 'فطيرة جبن سائل كلاسيك دافئة وخفيفة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612557686-1.jpg', true, false, '[]', false, false, true, true, false, 33),
 ('cheese-9', 'cheese', 'الجبن', 'جبن سائل بالخضار', 9.00, '600', 'جبن سائل مع خضار مشكلة (طماطم، فلفل رومي، زيتون)', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612557892-2.jpg', true, false, '[]', false, false, true, true, false, 34),
-('spinach-1', 'cheese', 'سبانخ', 'سبانخ جبن موزاريلا', 9.00, '540', 'سبانخ بلدية متبلة مع موزاريلا ذائبة ومحمصة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612565047-4.jpg', true, false, '[]', false, false, true, false, false, 35),
-('spinach-2', 'cheese', 'سبانخ', 'سبانخ باللبنة', 9.00, '530', 'سبانخ حامضة مع لبنة طازجة وزيت زيتون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612565087-5.jpg', true, false, '[]', false, false, true, false, false, 36),
-('spinach-3', 'cheese', 'سبانخ', 'فطيرة سبانخ', 8.00, '450', 'سبانخ بلدية بالبصل والليمون والسماق البلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/cWiHFeiNBMXukPi4WrEI.jpeg', true, false, '[]', false, false, true, true, false, 37),
 
--- المشويات واللحم
+-- سبانخ
+('spinach-1', 'spinach', 'سبانخ', 'سبانخ جبن موزاريلا', 9.00, '540', 'سبانخ بلدية متبلة مع موزاريلا ذائبة وم محمصة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612565047-4.jpg', true, false, '[]', false, false, true, false, false, 35),
+('spinach-2', 'spinach', 'سبانخ', 'سبانخ باللبنة', 9.00, '530', 'سبانخ حامضة مع لبنة طازجة وزيت زيتون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612565087-5.jpg', true, false, '[]', false, false, true, false, false, 36),
+('spinach-3', 'spinach', 'سبانخ', 'فطيرة سبانخ', 8.00, '450', 'سبانخ بلدية بالبصل والليمون والسماق البلدي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/cWiHFeiNBMXukPi4WrEI.jpeg', true, false, '[]', false, false, true, true, false, 37),
+
+-- لحم
 ('meat-1', 'meat', 'لحم', 'لحم بالجبن و البيض', 12.00, '650', 'لحم مفروم طازج بالجبن والبيض المخفوق', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/BncMseRdiY9uUV7n4kaX.jpg', true, false, '[]', false, false, false, false, false, 38),
 ('meat-2', 'meat', 'لحم', 'لحم بالجبنة', 12.00, '580', 'صفيحة لحم بالجبن الذائب والتوابل الملكية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612566011-2.jpg', true, false, '[]', true, false, false, false, false, 39),
 ('meat-3', 'meat', 'لحم', 'لحم بالبيض', 12.00, '560', 'لحم مفروم متبل بالبيض المحمص في الفرن الحجري', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612566097-3.jpg', true, false, '[]', false, false, false, false, false, 40),
 ('meat-4', 'meat', 'لحم', 'لحم بالعجين', 10.00, '510', 'صفيحة لحم بالعجين دمشقية أصيلة بدبس الرمان والصنوبر', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/OtlX0Bkk_oC7QYTrvZ1K.jpg', true, false, '[]', true, false, false, false, false, 41),
-('grill-1', 'meat', 'المشويات', 'كباب لحم فطيرة', 12.00, '280', 'فطيرة سيخ كباب لحم مشوي على الفحم بتتبيلة خاصة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/CX6S_BtqFZ75bFAj674g.jpeg', true, false, '[]', true, false, false, false, false, 42),
-('grill-2', 'meat', 'المشويات', 'كباب لحم لبنة فطيرة', 13.00, '320', 'كباب لحم مشوي مع لبنة تركية طازجة ولمسة سماق', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/al7axbxyyXD6zKwaXHdc.jpeg', true, false, '[]', false, false, false, false, false, 43),
-('grill-3', 'meat', 'المشويات', 'كباب لحم جبن فطيرة', 13.00, '534', 'كباب لحم مشوي مع جبن كيري وموزاريلا ذائب', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/ZLIAqH2_ZK48afCptZL3.jpeg', true, false, '[]', false, false, false, false, false, 44),
-('grill-4', 'meat', 'المشويات', 'كباب دجاج فطيرة', 11.00, '488', 'فطيرة سيخ كباب دجاج مشوي متبل بالثوم والليمون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/CX6S_BtqFZ75bFAj674g.jpeg', true, false, '[]', false, false, false, false, false, 45),
-('grill-5', 'meat', 'المشويات', 'كباب دجاج لبنة فطيرة', 12.00, '481', 'كباب دجاج مشوي مع لبنة ناعمة وخضار متبلة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/al7axbxyyXD6zKwaXHdc.jpeg', true, false, '[]', false, false, false, false, false, 46),
-('grill-6', 'meat', 'المشويات', 'كباب دجاج جبن فطيرة', 13.00, '550', 'كباب دجاج مشوي مع جبن ساخن بالعجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/ZLIAqH2_ZK48afCptZL3.jpeg', true, false, '[]', false, false, false, false, false, 47),
-('grill-7', 'meat', 'المشويات', 'شيش طاووق فطيرة', 11.00, '580', 'أوصال شيش طاووق مشوية طازجة مع الثوم والمخلل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/5Nmnk2NrHyM5-KmMx7D5.jpeg', true, false, '[]', true, false, false, false, false, 48),
-('grill-8', 'meat', 'المشويات', 'شيش طاووق لبنة فطيرة', 12.00, '560', 'شيش طاووق مع لبنة طازجة في فطيرة ساخنة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/0e5ONPVG0UE9XN1VgXqo.png', true, false, '[]', false, false, false, false, false, 49),
-('grill-9', 'meat', 'المشويات', 'شيش طاووق جبن فطيرة', 13.00, '540', 'شيش طاووق مع جبن كريمي ذائب وصوص الثوم', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/OTn21Xja-gmtTx7pHpMj.jpeg', true, false, '[]', false, false, false, false, false, 50),
-('hotdog-1', 'meat', 'هوت دوج', 'فطيرة هوت دوج', 12.00, '570', 'فطيرة هوت دوج كلاسيك مع الكاتشب والخردل وموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641972048Lyq3sg.jpeg', true, false, '[]', false, false, false, false, false, 51),
-('hotdog-2', 'meat', 'هوت دوج', 'هوت دوج شيدر', 14.00, '680', 'هوت دوج مغطى بجبنة الشيدر الذائبة ومقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568334-2.jpg', true, false, '[]', false, false, false, false, false, 52),
 
--- البيتزا والوجبات العائلية (مع دعم المقاسات / Sizes)
-('pizza-ranch', 'family', 'البيتزا', 'بيتزا دجاج رانش', 16.00, '1000 - 1487', 'صلصة رانش كريمية مع قطع دجاج مشوية وموزاريلا وفلفل بارد مقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, true, false, false, false, false, 53),
-('pizza-tawook', 'family', 'البيتزا', 'بيتزا شيش طاووق', 18.00, '500 - 1000', 'بيتزا شيش طاووق مشوية بالفرن الحجري مع صوص الثوم والموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/KhSS6OzqcyDI1O_Iv0cO.jpeg', true, true, '[{"name": "حجم صغير", "price": 18.00}, {"name": "حجم كبير", "price": 24.00}]'::jsonb, false, false, false, false, false, 54),
-('pizza-margarita', 'family', 'البيتزا', 'بيتزا مارجريتا', 16.00, '830 - 1380', 'بيتزا مارجريتا كلاسيكية بصلصة الطماطم الإيطالية وجبن الموزاريلا والريحان', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642060608WKQ8F3.jpg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, false, false, true, false, false, 55),
-('pizza-pepperoni', 'family', 'البيتزا', 'بيتزا بيبروني', 16.00, '1460', 'بيتزا بيبروني لحم بقري مدخن مع جبنة موزاريلا غنية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, true, false, false, false, false, 56),
-('pizza-dynamite', 'family', 'البيتزا', 'بيتزا داينمايت حارة', 16.00, '1000', 'بيتزا داينمايت حارة (Spicy) بصلصة الداينمايت النارية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642064298-OnAMV.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, false, true, false, false, false, 57),
+-- المشويات
+('grill-1', 'grills', 'المشويات', 'كباب لحم فطيرة', 12.00, '280', 'فطيرة سيخ كباب لحم مشوي على الفحم بتتبيلة خاصة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/CX6S_BtqFZ75bFAj674g.jpeg', true, false, '[]', true, false, false, false, false, 42),
+('grill-2', 'grills', 'المشويات', 'كباب لحم لبنة فطيرة', 13.00, '320', 'كباب لحم مشوي مع لبنة تركية طازجة ولمسة سماق', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/al7axbxyyXD6zKwaXHdc.jpeg', true, false, '[]', false, false, false, false, false, 43),
+('grill-3', 'grills', 'المشويات', 'كباب لحم جبن فطيرة', 13.00, '534', 'كباب لحم مشوي مع جبن كيري وموزاريلا ذائب', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/ZLIAqH2_ZK48afCptZL3.jpeg', true, false, '[]', false, false, false, false, false, 44),
+('grill-4', 'grills', 'المشويات', 'كباب دجاج فطيرة', 11.00, '488', 'فطيرة سيخ كباب دجاج مشوي متبل بالثوم والليمون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/CX6S_BtqFZ75bFAj674g.jpeg', true, false, '[]', false, false, false, false, false, 45),
+('grill-5', 'grills', 'المشويات', 'كباب دجاج لبنة فطيرة', 12.00, '481', 'كباب دجاج مشوي مع لبنة ناعمة وخضار متبلة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/al7axbxyyXD6zKwaXHdc.jpeg', true, false, '[]', false, false, false, false, false, 46),
+('grill-6', 'grills', 'المشويات', 'كباب دجاج جبن فطيرة', 13.00, '550', 'كباب دجاج مشوي مع جبن ساخن بالعجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/ZLIAqH2_ZK48afCptZL3.jpeg', true, false, '[]', false, false, false, false, false, 47),
+('grill-7', 'grills', 'المشويات', 'شيش طاووق فطيرة', 11.00, '580', 'أوصال شيش طاووق مشوية طازجة مع الثوم والمخلل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/5Nmnk2NrHyM5-KmMx7D5.jpeg', true, false, '[]', true, false, false, false, false, 48),
+('grill-8', 'grills', 'المشويات', 'شيش طاووق لبنة فطيرة', 12.00, '560', 'شيش طاووق مع لبنة طازجة في فطيرة ساخنة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/0e5ONPVG0UE9XN1VgXqo.png', true, false, '[]', false, false, false, false, false, 49),
+('grill-9', 'grills', 'المشويات', 'شيش طاووق جبن فطيرة', 13.00, '540', 'شيش طاووق مع جبن كريمي ذائب وصوص الثوم', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/OTn21Xja-gmtTx7pHpMj.jpeg', true, false, '[]', false, false, false, false, false, 50),
+
+-- هوت دوج
+('hotdog-1', 'hotdog', 'هوت دوج', 'فطيرة هوت دوج', 12.00, '570', 'فطيرة هوت دوج كلاسيك مع الكاتشب والخردل وموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1641972048Lyq3sg.jpeg', true, false, '[]', false, false, false, false, false, 51),
+('hotdog-2', 'hotdog', 'هوت دوج', 'هوت دوج شيدر', 14.00, '680', 'هوت دوج مغطى بجبنة الشيدر الذائبة ومقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568334-2.jpg', true, false, '[]', false, false, false, false, false, 52),
+
+-- البيتزا (مع دعم الأحجام / Sizes)
+('pizza-ranch', 'pizza', 'البيتزا', 'بيتزا دجاج رانش', 16.00, '1000 - 1487', 'صلصة رانش كريمية مع قطع دجاج مشوية وموزاريلا وفلفل بارد مقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, true, false, false, false, false, 53),
+('pizza-tawook', 'pizza', 'البيتزا', 'بيتزا شيش طاووق', 18.00, '500 - 1000', 'بيتزا شيش طاووق مشوية بالفرن الحجري مع صوص الثوم والموزاريلا', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/KhSS6OzqcyDI1O_Iv0cO.jpeg', true, true, '[{"name": "حجم صغير", "price": 18.00}, {"name": "حجم كبير", "price": 24.00}]'::jsonb, false, false, false, false, false, 54),
+('pizza-margarita', 'pizza', 'البيتزا', 'بيتزا مارجريتا', 16.00, '830 - 1380', 'بيتزا مارجريتا كلاسيكية بصلصة الطماطم الإيطالية وجبن الموزاريلا والريحان', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642060608WKQ8F3.jpg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, false, false, true, false, false, 55),
+('pizza-pepperoni', 'pizza', 'البيتزا', 'بيتزا بيبروني', 16.00, '1460', 'بيتزا بيبروني لحم بقري مدخن مع جبنة موزاريلا غنية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-category/1642011197bduIkJ.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, true, false, false, false, false, 56),
+('pizza-dynamite', 'pizza', 'البيتزا', 'بيتزا داينمايت حارة', 16.00, '1000', 'بيتزا داينمايت حارة (Spicy) بصلصة الداينمايت النارية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642064298-OnAMV.jpeg', true, true, '[{"name": "حجم صغير", "price": 16.00}, {"name": "حجم كبير", "price": 20.00}]'::jsonb, false, true, false, false, false, 57),
 
 -- الوجبات العائلية (بوكسات)
 ('family-1', 'family', 'الوجبات العائلية', 'مينى معجنات كبير (بوكس عائلي)', 55.00, '3180', 'تشكيلة فاخرة من الميني معجنات المتنوعة (لحم، جبن، زعتر، سبانخ) مثالية للمناسبات والجمعات العائلية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/kbtsxPCmTABRtzB5iSpe.jpg', true, false, '[]', true, false, false, false, true, 58),
@@ -199,22 +220,29 @@ VALUES
 ('family-7', 'family', 'الوجبات العائلية', 'صفائح مشكل كبير', 35.00, '2141', 'صفائح لحم واجبان متنوعة ومقرمشة كبير', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642575773w1SDQl.jpg', true, false, '[]', false, false, false, false, true, 64),
 ('family-8', 'family', 'الوجبات العائلية', 'بوكس الافطار', 63.00, '5310', 'بوكس إفطار متكامل للعائلة يضم اللبنة والجبن والشكشوكة والزعتر والفلافل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/crqkoULWwHfMmFZczOlb.jpeg', true, false, '[]', true, false, false, false, true, 65),
 
--- كافتيريا وصباح الملكة
-('morning-1', 'cafeteria', 'صباح الملكة', 'شكشوكة كلاسيك', 7.00, '569', 'شكشوكة كلاسيكية طازجة محضرة على أصولها', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/JGekrN7u3Xfo8iO63BC4.jpeg', true, false, '[]', false, false, true, true, false, 66),
+-- صباح الملكة
+('morning-1', 'morning', 'صباح الملكة', 'شكشوكة كلاسيك', 7.00, '569', 'شكشوكة كلاسيكية طازجة محضرة على أصولها', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/JGekrN7u3Xfo8iO63BC4.jpeg', true, false, '[]', false, false, true, true, false, 66),
 
--- حلا والمشروبات
-('sweet-1', 'sweets-drinks', 'حلا', 'عش البلبل', 18.00, '520 - 850', 'عش البلبل المميز باللبنة والجبن وعسل النحل الطبيعي دافئ ومقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642067383W5gcR2.jpg', true, true, '[{"name": "حجم صغير", "price": 18.00}, {"name": "حجم كبير", "price": 23.00}]'::jsonb, true, false, true, false, false, 67),
-('sweet-3', 'sweets-drinks', 'حلا', 'حلاوة بالجبن الموزاريلا', 8.05, '690', 'فطيرة حلاوة طحينية ساخنة مع جبن موزاريلا مطاطي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568626-2.jpeg', true, false, '[]', false, false, true, false, false, 68),
-('sweet-4', 'sweets-drinks', 'حلا', 'لبنة بالعسل', 8.00, '530', 'لبنة طازجة مع عسل النحل الصافي على العجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568855-4.jpg', true, false, '[]', false, false, true, false, false, 69),
-('sweet-5', 'sweets-drinks', 'حلا', 'شوكولاتة بالعجين', 8.00, '600', 'فطيرة شوكولاتة نوتيلا دافئة وغنية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568926-5.jpg', true, false, '[]', false, false, true, false, false, 70),
-('sweet-6', 'sweets-drinks', 'حلا', 'حلاوة طحينية', 7.00, '640', 'فطيرة حلاوة طحينية بلدية دافئة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568596-1.jpg', true, false, '[]', false, false, true, false, false, 71),
-('sauce-1', 'sweets-drinks', 'الصوصات', 'ثوميه شامية', 2.00, '125', 'صلصة الثومية الشامية الأصلية الكريمية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/zXQo69Jw2gSQo_s2urZR.png', true, false, '[]', false, false, true, true, false, 72),
-('sauce-2', 'sweets-drinks', 'الصوصات', 'صوص الطحينة', 2.00, '89', 'طحينة بيضاء بلدي مع الليمون والكمون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/Mp9y7bmwrtfY74K9zuCv.jpeg', true, false, '[]', false, false, true, true, false, 73),
-('drink-1', 'sweets-drinks', 'المشروبات', 'بيبسي بارد', 4.00, '152', 'مشروب غازي بيبسي مثلج ومنعش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591386-2.jpg', true, false, '[]', false, false, false, true, false, 74),
-('drink-2', 'sweets-drinks', 'المشروبات', 'سفن آب', 4.00, '159', 'مشروب غازي سفن آب ليمون منعش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591475-3.jpg', true, false, '[]', false, false, false, true, false, 75),
-('drink-3', 'sweets-drinks', 'المشروبات', 'ميرندا برتقال', 4.00, '191', 'مشروب ميرندا غازي مثلج بنكهة البرتقال', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591603-4.jpg', true, false, '[]', false, false, false, true, false, 76),
-('drink-4', 'sweets-drinks', 'المشروبات', 'ماونتن ديو', 4.00, '173', 'مشروب غازي ماونتن ديو بارد', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591742-91_9a6442de25966ce638d70197db05f03c.jpg', true, false, '[]', false, false, false, true, false, 77),
-('drink-5', 'sweets-drinks', 'المشروبات', 'مياه معدنية نقية', 1.00, '0', 'مياه صحية نقية طبيعية 330 مل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591328-1.jpg', true, false, '[]', false, false, false, true, false, 78)
+-- كافتيريا الملكة
+('cafeteria-1', 'cafeteria', 'كافتيريا الملكة', 'كبدة اسكندراني ملكية', 14.00, '380', 'ساندوتش وفطيرة كبدة اسكندراني طازجة بتتبيلة فلفل وثوم مميزة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/5KP5rgTRf7XLClHojZkA.png', true, false, '[]', true, false, false, true, false, 79),
+
+-- حلا
+('sweet-1', 'sweets', 'حلا', 'عش البلبل', 18.00, '520 - 850', 'عش البلبل المميز باللبنة والجبن وعسل النحل الطبيعي دافئ ومقرمش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1642067383W5gcR2.jpg', true, true, '[{"name": "حجم صغير", "price": 18.00}, {"name": "حجم كبير", "price": 23.00}]'::jsonb, true, false, true, false, false, 67),
+('sweet-3', 'sweets', 'حلا', 'حلاوة بالجبن الموزاريلا', 8.05, '690', 'فطيرة حلاوة طحينية ساخنة مع جبن موزاريلا مطاطي', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568626-2.jpeg', true, false, '[]', false, false, true, false, false, 68),
+('sweet-4', 'sweets', 'حلا', 'لبنة بالعسل', 8.00, '530', 'لبنة طازجة مع عسل النحل الصافي على العجينة المقرمشة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568855-4.jpg', true, false, '[]', false, false, true, false, false, 69),
+('sweet-5', 'sweets', 'حلا', 'شوكولاتة بالعجين', 8.00, '600', 'فطيرة شوكولاتة نوتيلا دافئة وغنية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568926-5.jpg', true, false, '[]', false, false, true, false, false, 70),
+('sweet-6', 'sweets', 'حلا', 'حلاوة طحينية', 7.00, '640', 'فطيرة حلاوة طحينية بلدية دافئة', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612568596-1.jpg', true, false, '[]', false, false, true, false, false, 71),
+
+-- الصوصات
+('sauce-1', 'sauces', 'الصوصات', 'ثوميه شامية', 2.00, '125', 'صلصة الثومية الشامية الأصلية الكريمية', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/zXQo69Jw2gSQo_s2urZR.png', true, false, '[]', false, false, true, true, false, 72),
+('sauce-2', 'sauces', 'الصوصات', 'صوص الطحينة', 2.00, '89', 'طحينة بيضاء بلدي مع الليمون والكمون', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/Mp9y7bmwrtfY74K9zuCv.jpeg', true, false, '[]', false, false, true, true, false, 73),
+
+-- المشروبات
+('drink-1', 'drinks', 'المشروبات', 'بيبسي بارد', 4.00, '152', 'مشروب غازي بيبسي مثلج ومنعش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591386-2.jpg', true, false, '[]', false, false, false, true, false, 74),
+('drink-2', 'drinks', 'المشروبات', 'سفن آب', 4.00, '159', 'مشروب غازي سفن آب ليمون منعش', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591475-3.jpg', true, false, '[]', false, false, false, true, false, 75),
+('drink-3', 'drinks', 'المشروبات', 'ميرندا برتقال', 4.00, '191', 'مشروب ميرندا غازي مثلج بنكهة البرتقال', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591603-4.jpg', true, false, '[]', false, false, false, true, false, 76),
+('drink-4', 'drinks', 'المشروبات', 'ماونتن ديو', 4.00, '173', 'مشروب غازي ماونتن ديو بارد', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591742-91_9a6442de25966ce638d70197db05f03c.jpg', true, false, '[]', false, false, false, true, false, 77),
+('drink-5', 'drinks', 'المشروبات', 'مياه معدنية نقية', 1.00, '0', 'مياه صحية نقية طبيعية 330 مل', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/1612591328-1.jpg', true, false, '[]', false, false, false, true, false, 78)
 ON CONFLICT (id) DO UPDATE SET
     category_id = EXCLUDED.category_id,
     category_name = EXCLUDED.category_name,
@@ -238,11 +266,11 @@ ON CONFLICT (id) DO UPDATE SET
 -- ========================================================
 -- 8. Insert Special Offers
 -- ========================================================
-INSERT INTO public.special_offers
-(id, title, badge, description, original_price, discounted_price, calories, image_url, items_included, is_available, sort_order)
+INSERT INTO public.special_offers 
+(id, title, badge, description, original_price, discounted_price, calories, image_url, items_included, is_available, sort_order) 
 VALUES
 ('offer-1', 'عرض الجمعات الملكي 👑', 'وفر 28 ريال', 'بوكس مينى معجنات كبير عائلي + 2 بيتزا حجم كبير من اختيارك + 4 مشروبات غازية باردة مجاناً', 115.00, 87.00, '4950', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/kbtsxPCmTABRtzB5iSpe.jpg', '["مينى معجنات كبير", "بيتزا دجاج رانش كبير", "بيتزا بيبروني كبير", "4 مشروبات غازية"]'::jsonb, true, 1),
-('offer-2', 'عرض الثنائي المشوي 🔥', 'الأكثر مبيعاً', '2 كباب دجاج ملغوم فطيرة + 2 كباب لحم ملغوم + 2 صصوص ثومية + 2 بيبسي مثلج', 68.00, 52.00, '2280', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/2nUwnLwDxLiapdroTtPf.jpeg', '["2 فطيرة كباب دجاج ملغوم", "2 فطيرة كباب لحم ملغوم", "2 صوص ثومية", "2 بيبسي"]'::jsonb, true, 2),
+('offer-2', 'عرض الثنائي المشوي 🔥', 'الأكثر مبيعاً', '2 كباب دجاج ملغوم فطيرة + 2 كباب لحم ملغوم + 2 صوص ثومية + 2 بيبسي مثلج', 68.00, 52.00, '2280', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/2nUwnLwDxLiapdroTtPf.jpeg', '["2 فطيرة كباب دجاج ملغوم", "2 فطيرة كباب لحم ملغوم", "2 صوص ثومية", "2 بيبسي"]'::jsonb, true, 2),
 ('offer-3', 'بوكس الإفطار الصباحي الملكي ☀️', 'فطور الملوك', 'فطيرة اللحسة + شكشوكة عدني + لبنة بالزعتر + فطيرة فلافل شيدر + شاي كرك طازج', 42.00, 32.00, '1850', 'https://ellmenus.com/images/0AbE3fsB2dD0KmUhsfQm/food-item/crqkoULWwHfMmFZczOlb.jpeg', '["فطيرة اللحسة", "شكشوكة عدني", "لبنة بالزعتر", "فطيرة فلافل شيدر"]'::jsonb, true, 3)
 ON CONFLICT (id) DO UPDATE SET
     title = EXCLUDED.title,

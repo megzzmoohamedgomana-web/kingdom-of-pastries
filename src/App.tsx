@@ -9,12 +9,9 @@ import { Header } from './components/Header';
 import { SearchBarAndFilters } from './components/SearchBarAndFilters';
 import { CategoryNav } from './components/CategoryNav';
 import { FoodCard } from './components/FoodCard';
-import { FloatingCartBar } from './components/FloatingCartBar';
-import { CheckoutModal } from './components/CheckoutModal';
 import { BottomNavBar } from './components/BottomNavBar';
 import { SpecialOffersView } from './components/SpecialOffersView';
-import { OrderTrackingView } from './components/OrderTrackingView';
-import { CartView } from './components/CartView';
+import { BranchesView } from './components/BranchesView';
 import { BranchSelectorModal } from './components/BranchSelectorModal';
 import { AdminPanel } from './components/AdminPanel';
 
@@ -72,7 +69,7 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
   };
 
   return (
-    <div className="flex flex-col w-full pb-28">
+    <div className="flex flex-col w-full pb-24">
       {/* Context & Search & Filters */}
       <SearchBarAndFilters onOpenBranchModal={() => setIsBranchModalOpen(true)} />
 
@@ -220,14 +217,14 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
         </section>
 
         {/* Footer Admin Entry */}
-        <div className="text-center py-2">
+        <div className="text-center py-3">
           <button
             type="button"
             onClick={onOpenAdmin}
             className="text-[11px] text-slate-400 hover:text-[#8d4b00] inline-flex items-center gap-1 transition-colors"
           >
             <span className="material-symbols-outlined text-[14px]">lock</span>
-            <span>دخول الإدارة (/admin)</span>
+            <span>دخول لوحة تحكم الإدارة (/admin)</span>
           </button>
         </div>
       </div>
@@ -243,12 +240,15 @@ const MainMenuCatalog: React.FC<{ onOpenAdmin: () => void }> = ({ onOpenAdmin })
 const AppContent: React.FC = () => {
   const { activeTab } = useCart();
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isBranchesModalOpen, setIsBranchesModalOpen] = useState(false);
 
   // Check URL pathname or hash for /admin on load and listen to changes
   useEffect(() => {
     const checkAdminRoute = () => {
-      const isPathAdmin = window.location.pathname.endsWith('/admin') || window.location.pathname === '/admin';
-      const isHashAdmin = window.location.hash === '#admin' || window.location.hash.startsWith('#/admin');
+      const isPathAdmin =
+        window.location.pathname.endsWith('/admin') || window.location.pathname === '/admin';
+      const isHashAdmin =
+        window.location.hash === '#admin' || window.location.hash.startsWith('#/admin');
       if (isPathAdmin || isHashAdmin) {
         setIsAdminOpen(true);
       }
@@ -280,22 +280,21 @@ const AppContent: React.FC = () => {
       {/* Header */}
       <Header onOpenAdmin={handleOpenAdmin} />
 
-      {/* Main View Area */}
+      {/* Main Menu Catalog View Area */}
       <main className="flex-1 w-full pt-[64px]">
         {activeTab === 'menu' && <MainMenuCatalog onOpenAdmin={handleOpenAdmin} />}
         {activeTab === 'offers' && <SpecialOffersView />}
-        {activeTab === 'orders' && <OrderTrackingView />}
-        {activeTab === 'cart' && <CartView />}
+        {activeTab === 'branches' && <BranchesView />}
       </main>
 
-      {/* Floating Cart Bar (visible when items > 0 on menu/offers tabs) */}
-      {(activeTab === 'menu' || activeTab === 'offers') && <FloatingCartBar />}
-
-      {/* Checkout Bottom Sheet Modal */}
-      <CheckoutModal />
-
       {/* Persistent Bottom Tab Navigation Bar */}
-      <BottomNavBar />
+      <BottomNavBar onOpenBranches={() => setIsBranchesModalOpen(true)} />
+
+      {/* Branches Modal */}
+      <BranchSelectorModal
+        isOpen={isBranchesModalOpen}
+        onClose={() => setIsBranchesModalOpen(false)}
+      />
 
       {/* Admin Panel Modal / Screen */}
       {isAdminOpen && <AdminPanel onClose={handleCloseAdmin} />}
